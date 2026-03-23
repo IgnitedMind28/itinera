@@ -154,6 +154,59 @@
     .tkt-onsite {
       font-size: 11px; color: #92400e; text-align: center; padding: 6px 0 2px;
     }
+
+    /* ── Bollywood Vibes ── */
+    @keyframes fabGlow {
+      0%,100% { box-shadow: 0 4px 18px rgba(251,146,60,0.5); }
+      50%      { box-shadow: 0 4px 32px rgba(251,146,60,0.95), 0 0 0 8px rgba(251,146,60,0.1); }
+    }
+    .bwood-fab {
+      position: fixed; bottom: 76px; right: 16px; z-index: 150;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, #fb923c 0%, #dc2626 100%);
+      border: 2px solid rgba(255,255,255,0.3);
+      cursor: pointer; font-size: 22px; outline: none;
+      display: flex; align-items: center; justify-content: center;
+      animation: fabGlow 2.5s ease-in-out infinite;
+      transition: transform 0.15s;
+    }
+    .bwood-fab:active { transform: scale(0.88); }
+
+    .bwood-panel {
+      position: fixed; inset: 0; z-index: 200;
+      overflow-y: auto; -webkit-overflow-scrolling: touch;
+      background: linear-gradient(180deg, #0d0400 0%, #280a00 35%, #4c1500 70%, #722200 100%);
+      transform: translateY(110%);
+      transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .bwood-panel.bwood-open { transform: translateY(0); }
+
+    .bwood-song {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px; border-radius: 16px; margin-bottom: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(251,191,36,0.1);
+      text-decoration: none;
+      transition: background 0.15s, border-color 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .bwood-song:active { background: rgba(251,191,36,0.1); border-color: rgba(251,191,36,0.4); }
+
+    .bwood-cat {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: rgba(251,191,36,0.45);
+      padding: 14px 4px 6px;
+    }
+
+    /* film-strip top bar */
+    .bwood-strip {
+      height: 18px; background: #050100;
+      display: flex; align-items: center; gap: 6px; padding: 0 8px; overflow: hidden;
+    }
+    .bwood-strip-cell {
+      width: 20px; height: 12px; border-radius: 2px;
+      background: rgba(251,191,36,0.18); flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
@@ -1701,6 +1754,10 @@
 </div><!-- /main content -->
 
 
+<!-- ── Bollywood FAB ── -->
+<button class="bwood-fab" id="bwood-fab" onclick="toggleBollywood()" aria-label="Bollywood Vibes">🎵</button>
+
+
 <!-- ══════════════════════════════════════════
      BOTTOM NAV BAR
 ══════════════════════════════════════════ -->
@@ -1875,6 +1932,15 @@
     arrow.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
   }
 
+  // ─── Bollywood Panel ───
+  function toggleBollywood() {
+    const panel = document.getElementById('bwood-panel');
+    const fab   = document.getElementById('bwood-fab');
+    const open  = panel.classList.toggle('bwood-open');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (fab) fab.textContent = open ? '✕' : '🎵';
+  }
+
   // ─── Init ───
   document.addEventListener('DOMContentLoaded', () => {
     createStars();
@@ -1882,6 +1948,209 @@
     showDay(0);
   });
 </script>
+
+<!-- ══════════════════════════════════════════
+     BOLLYWOOD PANEL
+══════════════════════════════════════════ -->
+<div id="bwood-panel" class="bwood-panel">
+
+  <!-- Film strip top edge -->
+  <div class="bwood-strip">
+    <div class="bwood-strip-cell"></div><div class="bwood-strip-cell"></div><div class="bwood-strip-cell"></div>
+    <div class="bwood-strip-cell"></div><div class="bwood-strip-cell"></div><div class="bwood-strip-cell"></div>
+    <div class="bwood-strip-cell"></div><div class="bwood-strip-cell"></div><div class="bwood-strip-cell"></div>
+    <div class="bwood-strip-cell"></div><div class="bwood-strip-cell"></div><div class="bwood-strip-cell"></div>
+    <div class="bwood-strip-cell"></div><div class="bwood-strip-cell"></div><div class="bwood-strip-cell"></div>
+    <div class="bwood-strip-cell"></div><div class="bwood-strip-cell"></div>
+  </div>
+
+  <!-- Close button (sticky top-right) -->
+  <div style="position:sticky; top:0; z-index:10; display:flex; justify-content:flex-end; padding:10px 16px 0; pointer-events:none;">
+    <button onclick="toggleBollywood()"
+      style="pointer-events:all; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18);
+             color:white; border-radius:50%; width:36px; height:36px; min-width:36px;
+             display:flex; align-items:center; justify-content:center;
+             font-size:15px; cursor:pointer; outline:none;">✕</button>
+  </div>
+
+  <!-- Header -->
+  <div style="text-align:center; padding: 4px 20px 16px;">
+    <div style="font-size:48px; margin-bottom:10px; line-height:1;">🎬</div>
+    <h2 class="playfair" style="color:white; font-size:26px; font-style:italic; margin:0 0 6px;">
+      Bollywood in Switzerland
+    </h2>
+    <p style="color:#fbbf24; font-size:13px; font-style:italic; margin:0 0 6px;">
+      जहाँ राज ने सिमरन से मुलाक़ात की
+    </p>
+    <p style="color:rgba(251,191,36,0.45); font-size:11px; margin:0;">
+      Timeless songs filmed right here in the Swiss Alps 🏔️
+    </p>
+  </div>
+
+  <!-- Yash Chopra tribute card -->
+  <div style="margin:0 16px 4px; padding:14px; border-radius:18px;
+              background:rgba(251,191,36,0.07); border:1px solid rgba(251,191,36,0.2);">
+    <div style="display:flex; align-items:flex-start; gap:12px;">
+      <span style="font-size:32px; line-height:1;">🎞️</span>
+      <div>
+        <p style="color:#fde68a; font-size:12px; font-weight:700; margin:0 0 4px;">
+          Yash Chopra &amp; the Swiss Alps
+        </p>
+        <p style="color:rgba(253,230,138,0.7); font-size:11px; line-height:1.6; margin:0;">
+          Yash Chopra filmed over a dozen movies in Switzerland across four decades —
+          so many that Swiss Tourism credited him with single-handedly making the Alps
+          a dream destination for Indian travellers. Interlaken, Grindelwald, and the
+          Berner Oberland were essentially his open-air studio. <em>You're travelling
+          in his footsteps. 💛</em>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Songs -->
+  <div style="padding: 0 16px 120px;">
+
+    <!-- ── DDLJ (1995) ── -->
+    <div class="bwood-cat">🎞️ Dilwale Dulhania Le Jayenge &middot; 1995</div>
+
+    <a href="https://www.youtube.com/results?search_query=Tujhe+Dekha+To+DDLJ+official+song" target="_blank" rel="noopener" class="bwood-song">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🌾</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:white;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Tujhe Dekha To Yeh Jana Sanam</div>
+        <div style="color:rgba(251,191,36,0.55);font-size:11px;">The mustard field moment · Shah Rukh &amp; Kajol</div>
+      </div>
+      <span style="color:rgba(251,191,36,0.5);font-size:20px;flex-shrink:0;">▶</span>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=Mere+Khwabon+Mein+Jo+Aaye+DDLJ+official" target="_blank" rel="noopener" class="bwood-song">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🏔️</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:white;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Mere Khwabon Mein Jo Aaye</div>
+        <div style="color:rgba(251,191,36,0.55);font-size:11px;">Simran dreams of the Alps · filmed in Switzerland</div>
+      </div>
+      <span style="color:rgba(251,191,36,0.5);font-size:20px;flex-shrink:0;">▶</span>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=Zara+Sa+Jhoom+Loon+Main+DDLJ+official" target="_blank" rel="noopener" class="bwood-song">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🚂</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:white;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Zara Sa Jhoom Loon Main</div>
+        <div style="color:rgba(251,191,36,0.55);font-size:11px;">Swiss train ride · the dance in the meadow</div>
+      </div>
+      <span style="color:rgba(251,191,36,0.5);font-size:20px;flex-shrink:0;">▶</span>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=Ho+Gaya+Hai+Tujhko+DDLJ+official" target="_blank" rel="noopener" class="bwood-song">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">💛</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:white;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Ho Gaya Hai Tujhko</div>
+        <div style="color:rgba(251,191,36,0.55);font-size:11px;">Swiss mountain romance · Raj &amp; Simran</div>
+      </div>
+      <span style="color:rgba(251,191,36,0.5);font-size:20px;flex-shrink:0;">▶</span>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=Ruk+Ja+O+Dil+Deewane+DDLJ+official" target="_blank" rel="noopener" class="bwood-song">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🎭</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:white;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Ruk Ja O Dil Deewane</div>
+        <div style="color:rgba(251,191,36,0.55);font-size:11px;">The legendary farewell · classic DDLJ finale</div>
+      </div>
+      <span style="color:rgba(251,191,36,0.5);font-size:20px;flex-shrink:0;">▶</span>
+    </a>
+
+    <!-- ── Chandni (1989) ── -->
+    <div class="bwood-cat">🌕 Chandni &middot; 1989</div>
+
+    <a href="https://www.youtube.com/results?search_query=Chandni+O+Meri+Chandni+Sridevi+official" target="_blank" rel="noopener" class="bwood-song">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🌙</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:white;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Chandni O Meri Chandni</div>
+        <div style="color:rgba(251,191,36,0.55);font-size:11px;">Swiss lake, moonlit night · Sridevi</div>
+      </div>
+      <span style="color:rgba(251,191,36,0.5);font-size:20px;flex-shrink:0;">▶</span>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=Mere+Haathon+Mein+Nau+Nau+Choodiyaan+Chandni+official" target="_blank" rel="noopener" class="bwood-song">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">💍</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:white;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Mere Haathon Mein Nau Nau Choodiyaan</div>
+        <div style="color:rgba(251,191,36,0.55);font-size:11px;">Wedding song · filmed in the Swiss Alps</div>
+      </div>
+      <span style="color:rgba(251,191,36,0.5);font-size:20px;flex-shrink:0;">▶</span>
+    </a>
+
+    <!-- ── Silsila (1981) ── -->
+    <div class="bwood-cat">🌸 Silsila &middot; 1981</div>
+
+    <a href="https://www.youtube.com/results?search_query=Neela+Aasman+So+Gaya+Silsila+official" target="_blank" rel="noopener" class="bwood-song">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🌠</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:white;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Neela Aasman So Gaya</div>
+        <div style="color:rgba(251,191,36,0.55);font-size:11px;">Alps under a sleeping sky · Amitabh Bachchan</div>
+      </div>
+      <span style="color:rgba(251,191,36,0.5);font-size:20px;flex-shrink:0;">▶</span>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=Rang+Barse+Silsila+official+Amitabh" target="_blank" rel="noopener" class="bwood-song">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🎨</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:white;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Rang Barse</div>
+        <div style="color:rgba(251,191,36,0.55);font-size:11px;">Holi in the Alps · the iconic Silsila song</div>
+      </div>
+      <span style="color:rgba(251,191,36,0.5);font-size:20px;flex-shrink:0;">▶</span>
+    </a>
+
+    <!-- ── Dil To Pagal Hai (1997) ── -->
+    <div class="bwood-cat">💃 Dil To Pagal Hai &middot; 1997</div>
+
+    <a href="https://www.youtube.com/results?search_query=Dil+To+Pagal+Hai+title+song+official+SRK" target="_blank" rel="noopener" class="bwood-song">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">💃</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:white;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Dil To Pagal Hai (Title Song)</div>
+        <div style="color:rgba(251,191,36,0.55);font-size:11px;">Dance among Swiss mountains · SRK &amp; Madhuri</div>
+      </div>
+      <span style="color:rgba(251,191,36,0.5);font-size:20px;flex-shrink:0;">▶</span>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=Are+Re+Are+Ye+Kya+Hua+Dil+To+Pagal+Hai+official" target="_blank" rel="noopener" class="bwood-song">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🎪</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:white;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Are Re Are Ye Kya Hua</div>
+        <div style="color:rgba(251,191,36,0.55);font-size:11px;">Joyful Swiss rain · Madhuri &amp; Karisma</div>
+      </div>
+      <span style="color:rgba(251,191,36,0.5);font-size:20px;flex-shrink:0;">▶</span>
+    </a>
+
+    <!-- ── Lamhe (1991) ── -->
+    <div class="bwood-cat">🦚 Lamhe &middot; 1991</div>
+
+    <a href="https://www.youtube.com/results?search_query=Morni+Baaga+Mein+Bole+Lamhe+official" target="_blank" rel="noopener" class="bwood-song">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🦚</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:white;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Morni Baaga Mein Bole</div>
+        <div style="color:rgba(251,191,36,0.55);font-size:11px;">Rajasthani soul in Swiss meadows · Sridevi</div>
+      </div>
+      <span style="color:rgba(251,191,36,0.5);font-size:20px;flex-shrink:0;">▶</span>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=Kabhi+Main+Kabhi+Tum+Lamhe+official" target="_blank" rel="noopener" class="bwood-song">
+      <div style="width:40px;height:40px;border-radius:12px;background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🌅</div>
+      <div style="flex:1;min-width:0;">
+        <div style="color:white;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Kabhi Main Kabhi Tum</div>
+        <div style="color:rgba(251,191,36,0.55);font-size:11px;">Swiss sunset love song · Anil Kapoor &amp; Sridevi</div>
+      </div>
+      <span style="color:rgba(251,191,36,0.5);font-size:20px;flex-shrink:0;">▶</span>
+    </a>
+
+    <!-- Footer note -->
+    <div style="text-align:center; padding:20px 8px 0; color:rgba(251,191,36,0.35); font-size:11px; line-height:1.6;">
+      🎬 Each song opens YouTube in a new tab<br>
+      Play some music &amp; let the Alps feel like home 🏔️💛
+    </div>
+
+  </div>
+</div>
+
 
 </body>
 </html>
