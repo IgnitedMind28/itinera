@@ -266,9 +266,9 @@
 ══════════════════════════════════════════ -->
 <div class="bg-white border-b border-slate-100 px-4 py-2.5">
   <div class="flex gap-3 overflow-x-auto no-scroll text-xs text-slate-500 items-center">
-    <span class="flex-shrink-0">👴👵 2 Elderly (60+)</span>
+    <span class="flex-shrink-0">👴👵 Elderly Couple</span>
     <span class="flex-shrink-0 text-slate-200">|</span>
-    <span class="flex-shrink-0">👫 2 Couples</span>
+    <span class="flex-shrink-0">👫👫 2 Adult Couples</span>
     <span class="flex-shrink-0 text-slate-200">|</span>
     <span class="flex-shrink-0">👦 6yr &amp; 👧 13yr</span>
     <span class="flex-shrink-0 text-slate-200">|</span>
@@ -456,7 +456,7 @@
 
     <!-- Timeline -->
     <div class="card">
-      <h3 class="font-semibold text-sm mb-4 text-slate-700 flex items-center gap-2">📍 Day 0 Timeline</h3>
+      <h3 class="font-semibold text-sm mb-4 text-slate-700 flex items-center gap-2">📋 Itinerary</h3>
 
       <div class="tl-item">
         <div class="tl-dot bg-indigo-100 text-indigo-600">✈️</div>
@@ -663,7 +663,7 @@
     </div>
 
     <div class="card">
-      <h3 class="font-semibold text-sm mb-4 text-slate-700">📍 Day 1 Timeline</h3>
+      <h3 class="font-semibold text-sm mb-4 text-slate-700">📋 Itinerary</h3>
 
       <div class="tl-item">
         <div class="tl-dot bg-yellow-100 text-yellow-600">🥚</div>
@@ -896,7 +896,7 @@
     </div>
 
     <div class="card">
-      <h3 class="font-semibold text-sm mb-4 text-slate-700">📍 Day 2 Timeline</h3>
+      <h3 class="font-semibold text-sm mb-4 text-slate-700">📋 Itinerary</h3>
 
       <div class="tl-item">
         <div class="tl-dot bg-yellow-100 text-yellow-600">🥚</div>
@@ -1092,6 +1092,16 @@
         <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">Option B: Chill Day 🌊</span>
       </div>
     </div>
+    <div class="flex border-t border-white/10 bg-black/15">
+      <a href="https://www.google.com/maps/dir/Merligen,+Switzerland/Grindelwald,+Switzerland" target="_blank"
+         class="flex-1 flex items-center justify-center gap-1 px-3 py-2.5 text-xs text-amber-200 no-underline border-r border-white/10">
+        <span>🗺️</span><span>Option A Route</span><span>↗</span>
+      </a>
+      <a href="https://www.google.com/maps/dir/Merligen,+Switzerland/Iseltwald,+Switzerland/Saint+Beatus+Caves,+Switzerland" target="_blank"
+         class="flex-1 flex items-center justify-center gap-1 px-3 py-2.5 text-xs text-amber-200 no-underline">
+        <span>🗺️</span><span>Option B Route</span><span>↗</span>
+      </a>
+    </div>
   </div>
 
   <!-- Option Toggle -->
@@ -1108,7 +1118,7 @@
     </div>
 
     <div class="card">
-      <h3 class="font-semibold text-sm mb-4 text-slate-700">📍 Grindelwald Timeline</h3>
+      <h3 class="font-semibold text-sm mb-4 text-slate-700">📋 Itinerary — Option A</h3>
 
       <div class="tl-item">
         <div class="tl-dot bg-slate-100 text-slate-500">🚗</div>
@@ -1244,7 +1254,7 @@
     </div>
 
     <div class="card">
-      <h3 class="font-semibold text-sm mb-4 text-slate-700">📍 Chill Day Timeline</h3>
+      <h3 class="font-semibold text-sm mb-4 text-slate-700">📋 Itinerary — Option B</h3>
 
       <div class="tl-item">
         <div class="tl-dot bg-yellow-100 text-yellow-600">🥚</div>
@@ -1432,7 +1442,7 @@
   <!-- FULL GROUP -->
   <div id="content-4-full">
     <div class="card">
-      <h3 class="font-semibold text-sm mb-4 text-slate-700">📍 Day 4 Timeline</h3>
+      <h3 class="font-semibold text-sm mb-4 text-slate-700">📋 Itinerary</h3>
 
       <div class="tl-item">
         <div class="tl-dot bg-yellow-100 text-yellow-600">🥚</div>
@@ -1731,15 +1741,12 @@
      BOTTOM NAV BAR
 ══════════════════════════════════════════ -->
 <div class="bottom-bar">
-  <div class="flex gap-1 max-w-lg mx-auto">
-    <button onclick="showDay(0)" class="flex-1 flex flex-col items-center text-[10px] text-slate-400 gap-0.5 py-1">
-      <span class="text-base">✈️</span><span>Arrival</span>
-    </button>
-    <button onclick="showDay(2)" class="flex-1 flex flex-col items-center text-[10px] text-slate-400 gap-0.5 py-1">
-      <span class="text-base">💧</span><span>Valley</span>
-    </button>
+  <div class="flex gap-1 max-w-lg mx-auto justify-around">
     <button onclick="showBudget()" class="flex-1 flex flex-col items-center text-[10px] gap-0.5 py-1 text-slate-400" id="budget-btn">
       <span class="text-base">💰</span><span>Budget</span>
+    </button>
+    <button onclick="toggleMusic()" class="flex-1 flex flex-col items-center text-[10px] gap-0.5 py-1 text-slate-400">
+      <span class="text-base">🎵</span><span>Music</span>
     </button>
     <a href="https://maps.app.goo.gl/M8z144yNFvYeFQqy5" target="_blank" class="flex-1 flex flex-col items-center text-[10px] text-slate-400 gap-0.5 py-1 no-underline">
       <span class="text-base">🏡</span><span>Home Base</span>
@@ -1836,7 +1843,6 @@
       b.classList.remove('hidden');
       budgetVisible = true;
       document.getElementById('budget-btn').style.color = '#1a3a5c';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       b.classList.add('hidden');
       budgetVisible = false;
@@ -1955,6 +1961,15 @@
     createStars();
     createSnow();
     showDay(0);
+    // Add "ITINERARY" label above mode toggles (days 0,1,2,4)
+    ['day-0','day-1','day-2','day-4'].forEach(id => {
+      const bar = document.querySelector('#' + id + ' .mode-bar');
+      if (!bar) return;
+      const lbl = document.createElement('div');
+      lbl.style.cssText = 'font-size:10px;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#94a3b8;margin-bottom:6px;padding:0 2px;';
+      lbl.textContent = 'Itinerary';
+      bar.parentNode.insertBefore(lbl, bar);
+    });
     // Load YouTube IFrame API
     const ytScript = document.createElement('script');
     ytScript.src = 'https://www.youtube.com/iframe_api';
