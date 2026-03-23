@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0f2744">
+  <title>Itinera · Switzerland 🇨🇭 Family Trip</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --alpine-dark: #0f2744;
+      --alpine: #1a3a5c;
+      --alpine-light: #2d5f8a;
+      --glacier: #38bdf8;
+      --valley: #059669;
+      --sunset: #d97706;
+    }
+
+    * { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #f1f5f9; overscroll-behavior: none; }
+    .playfair { font-family: 'Playfair Display', serif; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(180deg, #060e1e 0%, #0f2744 35%, #1a3a5c 65%, #2a5580 100%);
+      position: relative; overflow: hidden; min-height: 300px;
+    }
+
+    /* Stars */
+    .star { position: absolute; background: white; border-radius: 50%; animation: twinkle 3s ease-in-out infinite; }
+    @keyframes twinkle { 0%,100%{opacity:.4;} 50%{opacity:1;} }
+
+    /* Snow */
+    .snowflake {
+      position: absolute; background: rgba(255,255,255,0.7); border-radius: 50%;
+      animation: snowfall linear infinite;
+    }
+    @keyframes snowfall {
+      0%   { transform: translateY(-10px) translateX(0); opacity: 0.8; }
+      100% { transform: translateY(320px) translateX(15px); opacity: 0; }
+    }
+
+    /* Mountain SVG */
+    .mountains { position: absolute; bottom: 0; width: 100%; left: 0; }
+
+    /* ── Day Tabs ── */
+    .day-tab {
+      white-space: nowrap; transition: all 0.25s ease;
+      border: none; cursor: pointer; outline: none;
+    }
+    .day-tab.active { box-shadow: 0 4px 16px rgba(0,0,0,0.25); }
+
+    /* ── Cards ── */
+    .card {
+      background: white; border-radius: 18px; padding: 16px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06); margin-bottom: 12px;
+    }
+
+    /* ── Timeline ── */
+    .tl-item { position: relative; padding-left: 44px; padding-bottom: 20px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content: ''; position: absolute; left: 17px; top: 32px; bottom: -4px;
+      width: 2px; background: #e2e8f0;
+    }
+    .tl-item:last-child::before { display: none; }
+    .tl-dot {
+      position: absolute; left: 8px; top: 18px;
+      width: 20px; height: 20px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; flex-shrink: 0;
+    }
+
+    /* ── Mode Toggle ── */
+    .mode-bar { background: #f1f5f9; border-radius: 14px; padding: 4px; display: flex; }
+    .mode-btn {
+      flex: 1; padding: 9px 6px; border-radius: 10px; font-size: 12px;
+      font-weight: 600; text-align: center; cursor: pointer;
+      transition: all 0.2s; border: none; background: transparent; color: #64748b;
+    }
+    .mode-btn.active { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.12); color: #0f172a; }
+
+    /* ── Links ── */
+    .chip {
+      display: inline-flex; align-items: center; gap: 3px;
+      padding: 4px 10px; border-radius: 9999px; font-size: 11px;
+      font-weight: 500; text-decoration: none; cursor: pointer;
+    }
+
+    /* ── Budget bars ── */
+    .bbar { height: 7px; border-radius: 4px; background: #e2e8f0; overflow: hidden; margin-top: 4px; }
+    .bfill { height: 100%; border-radius: 4px; }
+
+    /* ── Transitions ── */
+    .day-section { animation: fadeUp 0.3s ease; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hidden { display: none !important; }
+
+    /* ── Bottom bar ── */
+    .bottom-bar {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: white; border-top: 1px solid #e2e8f0;
+      padding: 8px 16px 12px; z-index: 100;
+    }
+
+    /* ── Info banner ── */
+    .banner { border-radius: 14px; padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px; }
+
+    /* ── Highlight box ── */
+    .hbox { border-radius: 12px; padding: 10px 12px; }
+
+    /* scrollbar hide */
+    .no-scroll::-webkit-scrollbar { display: none; }
+    .no-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* glass */
+    .glass {
+      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    /* Pulse badge */
+    @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
+    .pulse { animation: pulse 2s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     HERO SECTION
+══════════════════════════════════════════ -->
+<div class="hero" id="top">
+  <div id="stars"></div>
+  <div id="snow-container"></div>
+
+  <!-- Mountain SVG -->
+  <svg class="mountains" viewBox="0 0 414 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="mGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#2a5580" stop-opacity="0.5"/>
+        <stop offset="100%" stop-color="#1a3a5c" stop-opacity="0.1"/>
+      </linearGradient>
+    </defs>
+    <!-- Back mountains -->
+    <path d="M0,90 L25,55 L55,75 L85,28 L115,62 L145,38 L175,68 L205,18 L235,52 L265,36 L295,62 L325,20 L355,50 L385,32 L414,48 L414,120 L0,120 Z" fill="rgba(255,255,255,0.06)"/>
+    <!-- Snow caps -->
+    <polygon points="85,28 95,42 115,62 75,58" fill="rgba(255,255,255,0.18)"/>
+    <polygon points="205,18 215,32 225,26 215,15" fill="rgba(255,255,255,0.22)"/>
+    <polygon points="325,20 335,33 345,26 335,16" fill="rgba(255,255,255,0.18)"/>
+    <!-- Front mountains -->
+    <path d="M0,106 L20,82 L50,96 L80,60 L110,88 L140,68 L170,90 L200,52 L230,78 L260,64 L290,84 L320,52 L350,76 L380,60 L414,72 L414,120 L0,120 Z" fill="rgba(255,255,255,0.04)"/>
+    <!-- Ground -->
+    <rect x="0" y="118" width="414" height="4" fill="#f1f5f9"/>
+  </svg>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 px-5 pt-10 pb-20">
+    <!-- Season badge -->
+    <div class="flex justify-center mb-4">
+      <span class="glass text-white text-xs px-4 py-1.5 rounded-full flex items-center gap-1.5">
+        🌸 Spring 2026 · Family Edition
+      </span>
+    </div>
+
+    <!-- Title -->
+    <div class="text-center mb-6">
+      <div class="text-5xl mb-2">🇨🇭</div>
+      <h1 class="playfair text-white text-5xl font-bold leading-none mb-2">Itinera</h1>
+      <p class="text-blue-200 text-xs tracking-[4px] uppercase">Switzerland Family Journey</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-4 gap-2 mb-4">
+      <div class="glass rounded-2xl p-3 text-center">
+        <div class="text-white text-2xl font-bold">5</div>
+        <div class="text-blue-200 text-[10px] mt-0.5">Days</div>
+      </div>
+      <div class="glass rounded-2xl p-3 text-center">
+        <div class="text-white text-2xl font-bold">8</div>
+        <div class="text-blue-200 text-[10px] mt-0.5">People</div>
+      </div>
+      <div class="glass rounded-2xl p-3 text-center">
+        <div class="text-white text-2xl font-bold">4</div>
+        <div class="text-blue-200 text-[10px] mt-0.5">Regions</div>
+      </div>
+      <div class="glass rounded-2xl p-3 text-center">
+        <div class="text-white text-2xl font-bold">🚗</div>
+        <div class="text-blue-200 text-[10px] mt-0.5">Road Trip</div>
+      </div>
+    </div>
+
+    <!-- Date Card -->
+    <div class="glass rounded-2xl p-4 text-center">
+      <div class="text-white font-semibold text-sm">April 29 — May 3, 2026</div>
+      <div class="text-blue-200 text-xs mt-1">Merligen, Lake Thun · Interlaken Region</div>
+      <div class="flex justify-center gap-3 mt-2 text-xs text-blue-200">
+        <span>✈️ AMS → ZRH (11:05)</span>
+        <span>·</span>
+        <span>✈️ ZRH → AMS (19:25)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     GROUP INFO BAR
+══════════════════════════════════════════ -->
+<div class="bg-white border-b border-slate-100 px-4 py-2.5">
+  <div class="flex gap-3 overflow-x-auto no-scroll text-xs text-slate-500 items-center">
+    <span class="flex-shrink-0">👴👵 2 Elderly (60+)</span>
+    <span class="flex-shrink-0 text-slate-200">|</span>
+    <span class="flex-shrink-0">👫 2 Couples</span>
+    <span class="flex-shrink-0 text-slate-200">|</span>
+    <span class="flex-shrink-0">👦 6yr &amp; 👧 13yr</span>
+    <span class="flex-shrink-0 text-slate-200">|</span>
+    <span class="flex-shrink-0">🥗 Mostly Veg</span>
+    <span class="flex-shrink-0 text-slate-200">|</span>
+    <span class="flex-shrink-0">🍳 Cooking breakfast + dinner</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     DAY NAVIGATION (STICKY)
+══════════════════════════════════════════ -->
+<div class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-100 shadow-sm">
+  <div class="flex gap-2 overflow-x-auto no-scroll px-3 py-2.5">
+    <button onclick="showDay(0)" id="tab-0" class="day-tab active flex-shrink-0 rounded-xl px-3 py-2 text-xs font-semibold text-white" style="background:#4338ca; min-width:68px;">
+      <div>Apr 29</div><div class="opacity-70 text-[10px]">✈️ Arrival</div>
+    </button>
+    <button onclick="showDay(1)" id="tab-1" class="day-tab flex-shrink-0 rounded-xl px-3 py-2 text-xs font-semibold text-slate-500 bg-slate-100" style="min-width:68px;">
+      <div>Apr 30</div><div class="opacity-70 text-[10px]">🏔️ Interlaken</div>
+    </button>
+    <button onclick="showDay(2)" id="tab-2" class="day-tab flex-shrink-0 rounded-xl px-3 py-2 text-xs font-semibold text-slate-500 bg-slate-100" style="min-width:68px;">
+      <div>May 1</div><div class="opacity-70 text-[10px]">💧 Lauterb.</div>
+    </button>
+    <button onclick="showDay(3)" id="tab-3" class="day-tab flex-shrink-0 rounded-xl px-3 py-2 text-xs font-semibold text-slate-500 bg-slate-100" style="min-width:68px;">
+      <div>May 2</div><div class="opacity-70 text-[10px]">🌿 Flex Day</div>
+    </button>
+    <button onclick="showDay(4)" id="tab-4" class="day-tab flex-shrink-0 rounded-xl px-3 py-2 text-xs font-semibold text-slate-500 bg-slate-100" style="min-width:68px;">
+      <div>May 3</div><div class="opacity-70 text-[10px]">🌉 Lucerne</div>
+    </button>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     MAIN CONTENT
+══════════════════════════════════════════ -->
+<div class="px-4 pt-4 pb-28 max-w-lg mx-auto">
+
+
+<!-- ═══════════════════════════════
+     DAY 0 — ARRIVAL
+═══════════════════════════════ -->
+<div id="day-0" class="day-section">
+
+  <!-- Day Header -->
+  <div class="rounded-2xl overflow-hidden mb-4 text-white" style="background:linear-gradient(135deg,#312e81,#4338ca,#6366f1);">
+    <div class="p-5">
+      <div class="text-[10px] uppercase tracking-widest text-indigo-200 mb-1">Day 0 · April 29, 2026</div>
+      <h2 class="playfair text-2xl font-bold mb-1">Arrival Day ✈️</h2>
+      <p class="text-indigo-200 text-sm">Zurich Airport → Spiez Castle → Merligen</p>
+      <div class="flex flex-wrap gap-2 mt-3">
+        <span class="bg-white/15 text-white text-[11px] px-2.5 py-1 rounded-full">~130 km total</span>
+        <span class="bg-white/15 text-white text-[11px] px-2.5 py-1 rounded-full">Recovery day 🛋️</span>
+        <span class="bg-white/15 text-white text-[11px] px-2.5 py-1 rounded-full">Grocery run 🛒</span>
+      </div>
+    </div>
+    <a href="https://www.google.com/maps/dir/Zurich+Airport/Spiez+Switzerland/Merligen+Switzerland" target="_blank"
+       class="flex items-center justify-between px-5 py-3 bg-black/15 border-t border-white/10 text-sm text-indigo-100 no-underline">
+      <span>📍 Open Day 0 Route in Maps</span><span>↗</span>
+    </a>
+  </div>
+
+  <!-- Mode Toggle -->
+  <div class="mode-bar mb-4">
+    <button class="mode-btn active" onclick="setMode(0,'full')" id="mode-0-full">👨‍👩‍👧‍👦 Full Group</button>
+    <button class="mode-btn" onclick="setMode(0,'active')" id="mode-0-active">🏃 Active Mode</button>
+  </div>
+
+  <!-- FULL GROUP -->
+  <div id="content-0-full">
+
+    <!-- Weather -->
+    <div class="banner bg-sky-50 border border-sky-100 mb-4">
+      <span class="text-xl flex-shrink-0">🌤️</span>
+      <div class="text-xs text-sky-700">
+        <strong>April 29 Typical Weather:</strong> 10–16°C in valleys. Bring light layers + a rain jacket. Mountains still snow-capped — stunning views on arrival!
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-4 text-slate-700 flex items-center gap-2">📍 Day 0 Timeline</h3>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-indigo-100 text-indigo-600">✈️</div>
+        <div>
+          <span class="text-[10px] font-bold text-indigo-500 uppercase">11:05 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Land at Zurich Airport (ZRH)</h4>
+          <p class="text-xs text-slate-500 mt-1">Immigration + baggage claim ~45–60 min. Proceed to Mietwagen / Car Rental hall.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Zurich+Airport+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Airport Map</a>
+            <span class="chip bg-green-50 text-green-700">🚻 All terminal floors</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-slate-100 text-slate-500">🚗</div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-400 uppercase">12:15 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Car Rental Pickup + Drive</h4>
+          <p class="text-xs text-slate-500 mt-1">A3/A1 → A8 highway toward Bern/Interlaken. Super scenic from Thun onwards — Lake Thun on your right!</p>
+          <div class="hbox bg-amber-50 mt-2">
+            <div class="text-[11px] font-semibold text-amber-700">⛽ Fuel Tip</div>
+            <div class="text-[11px] text-amber-600 mt-0.5">Fill up near Interlaken / before mountains. Price: ~CHF 1.80–2.00/L. Look for Coop Pronto or Migrol.</div>
+            <a href="https://maps.google.com/?q=petrol+station+Thun+Switzerland" target="_blank" class="chip bg-amber-100 text-amber-700 mt-2">⛽ Find Fuel</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-purple-100 text-purple-600">🏰</div>
+        <div>
+          <span class="text-[10px] font-bold text-purple-500 uppercase">14:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">📸 Spiez Castle Photo Stop</h4>
+          <p class="text-xs text-slate-500 mt-1">Right on your route! Medieval castle on Lake Thun with vineyard terraces. No need to go inside — the exterior + lake backdrop is world-class. 15–20 min stop.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Spiez+Castle+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=spiez+castle+lake+thun+switzerland" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+            <a href="https://www.instagram.com/explore/tags/spiezcastle/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #spiezcastle</a>
+          </div>
+          <div class="hbox bg-purple-50 mt-2">
+            <div class="text-[11px] font-semibold text-purple-700">📸 Photo Tip</div>
+            <div class="text-[11px] text-purple-600">Shoot from below looking up — castle framed by vineyard rows with Lake Thun behind. Portrait format. Magic golden-hour light late April.</div>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <span class="chip bg-blue-50 text-blue-600">🅿️ Castle grounds (free)</span>
+            <span class="chip bg-green-50 text-green-700">🚻 At castle entry</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-green-100 text-green-600">🏡</div>
+        <div>
+          <span class="text-[10px] font-bold text-green-500 uppercase">15:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Check-in at Merligen</h4>
+          <p class="text-xs text-slate-500 mt-1">Your home base for 4 nights. Settle in, unpack, let elderly and kids rest. This is a hidden gem — quiet lakeside village, no tourists!</p>
+          <a href="https://maps.google.com/?q=Merligen+Switzerland+Lake+Thun" target="_blank" class="chip bg-slate-100 text-slate-600 mt-2">📍 Merligen on Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-orange-100 text-orange-500">🛒</div>
+        <div>
+          <span class="text-[10px] font-bold text-orange-500 uppercase">16:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Big Grocery Run — Do This Today!</h4>
+          <p class="text-xs text-slate-500 mt-1">One big shop saves time every other day. Drive 20 min to Interlaken — both Coop and Migros are excellent.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Coop+Supermarkt+Interlaken" target="_blank" class="chip bg-orange-100 text-orange-600">🛒 Coop Interlaken</a>
+            <a href="https://maps.google.com/?q=Migros+Supermarkt+Interlaken" target="_blank" class="chip bg-orange-100 text-orange-600">🛒 Migros Interlaken</a>
+          </div>
+          <div class="hbox bg-orange-50 mt-2 text-[11px] text-orange-700">
+            <strong>Buy in bulk:</strong> Bread, eggs, butter, milk, pasta, rice, lentils, spices, yogurt, fruits, Swiss chocolates 🍫, juices, ready-meals for lazy nights, snack bars for day trips.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-sky-100 text-sky-500">🌅</div>
+        <div>
+          <span class="text-[10px] font-bold text-sky-500 uppercase">18:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Lake Thun Evening Walk 🌊</h4>
+          <p class="text-xs text-slate-500 mt-1">Gentle lakeside stroll right from your apartment. Crystal-clear turquoise water, Alps reflected. Kids can skim stones. Zero effort, maximum calm.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Lake+Thun+Merligen+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.instagram.com/explore/tags/lakethun/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #lakethun</a>
+          </div>
+          <div class="hbox bg-sky-50 mt-2 text-[11px] text-sky-700">
+            📸 <strong>Golden Hour Shot:</strong> Late April sunset ~8:15 PM here. Silhouette family photo by the lake with Alps behind. Reflections on still water = cover-of-a-magazine material.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-green-100 text-green-600">🍳</div>
+        <div>
+          <span class="text-[10px] font-bold text-green-500 uppercase">19:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Home-Cooked Dinner</h4>
+          <p class="text-xs text-slate-500 mt-1">Simple first night — pasta, dal-rice, whatever feels like home. Early night. Long day but beautiful one complete!</p>
+        </div>
+      </div>
+    </div><!-- /card -->
+
+    <!-- Budget Card -->
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-3 flex items-center gap-2">💰 Day 0 Estimated Budget
+        <span class="text-xs font-normal text-slate-400">(8 people)</span>
+      </h3>
+      <div class="space-y-3">
+        <div>
+          <div class="flex justify-between text-xs"><span class="text-slate-600">⛽ Fuel ZRH → Merligen (~130 km)</span><span class="font-semibold">25–35 CHF</span></div>
+          <div class="bbar"><div class="bfill bg-amber-400" style="width:15%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-xs"><span class="text-slate-600">🛒 Groceries (4-day supply)</span><span class="font-semibold">200–260 CHF</span></div>
+          <div class="bbar"><div class="bfill bg-orange-400" style="width:70%"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-xs"><span class="text-slate-600">🍱 Lunch on the road</span><span class="font-semibold">80–120 CHF</span></div>
+          <div class="bbar"><div class="bfill bg-green-400" style="width:35%"></div></div>
+        </div>
+        <div class="flex justify-between text-sm font-bold pt-2 border-t border-slate-100">
+          <span>Total</span><span class="text-indigo-600">~305–415 CHF</span>
+        </div>
+      </div>
+    </div>
+  </div><!-- /content-0-full -->
+
+  <!-- ACTIVE MODE (Day 0 — same, it's arrival day) -->
+  <div id="content-0-active" class="hidden">
+    <div class="card bg-amber-50 border border-amber-100 text-center py-6">
+      <div class="text-4xl mb-3">😴</div>
+      <div class="font-semibold text-amber-800">Arrival Day — Everyone Rests!</div>
+      <div class="text-xs text-amber-600 mt-2 px-4">Even in Active Mode, Day 0 is about recovery. You've flown from Amsterdam! A strong rest today = incredible energy for the days ahead.</div>
+    </div>
+  </div>
+
+</div><!-- /day-0 -->
+
+
+<!-- ═══════════════════════════════
+     DAY 1 — INTERLAKEN
+═══════════════════════════════ -->
+<div id="day-1" class="day-section hidden">
+
+  <div class="rounded-2xl overflow-hidden mb-4 text-white" style="background:linear-gradient(135deg,#075985,#0284c7,#38bdf8);">
+    <div class="p-5">
+      <div class="text-[10px] uppercase tracking-widest text-sky-200 mb-1">Day 1 · April 30, 2026</div>
+      <h2 class="playfair text-2xl font-bold mb-1">Interlaken Day 🏔️</h2>
+      <p class="text-sky-200 text-sm">Merligen → Interlaken → Harder Kulm → Unterseen</p>
+      <div class="flex flex-wrap gap-2 mt-3">
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">~20 km from base</span>
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">Funicular 🚡</span>
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">Paragliders 🪂</span>
+      </div>
+    </div>
+    <a href="https://www.google.com/maps/dir/Merligen+Switzerland/Interlaken+Switzerland" target="_blank"
+       class="flex items-center justify-between px-5 py-3 bg-black/15 border-t border-white/10 text-sm text-sky-100 no-underline">
+      <span>📍 Open Day 1 Route in Maps</span><span>↗</span>
+    </a>
+  </div>
+
+  <div class="mode-bar mb-4">
+    <button class="mode-btn active" onclick="setMode(1,'full')" id="mode-1-full">👨‍👩‍👧‍👦 Full Group</button>
+    <button class="mode-btn" onclick="setMode(1,'active')" id="mode-1-active">🏃 Active Mode</button>
+  </div>
+
+  <!-- FULL GROUP -->
+  <div id="content-1-full">
+
+    <div class="banner bg-sky-50 border border-sky-100 mb-4">
+      <span class="text-xl flex-shrink-0">⭐</span>
+      <div class="text-xs text-sky-700">
+        <strong>Classic Switzerland day!</strong> Interlaken sits between two lakes with Jungfrau backdrop. Easy day — one car park, walk everywhere.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-4 text-slate-700">📍 Day 1 Timeline</h3>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-yellow-100 text-yellow-600">🥚</div>
+        <div>
+          <span class="text-[10px] font-bold text-yellow-600 uppercase">08:30 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Home Breakfast</h4>
+          <p class="text-xs text-slate-500 mt-1">Eggs, toast, chai/coffee. Let elderly wake slowly. Leave by 9:30.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-slate-100 text-slate-500">🚗</div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-400 uppercase">09:30 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Drive to Interlaken (~20 min)</h4>
+          <p class="text-xs text-slate-500 mt-1">Scenic drive along Lake Thun. Morning light on the Alps — keep eyes on the road! 😄</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-blue-100 text-blue-600">🅿️</div>
+        <div>
+          <span class="text-[10px] font-bold text-blue-500 uppercase">09:50 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Park &amp; Leave Car All Day</h4>
+          <div class="hbox bg-blue-50 mt-2">
+            <div class="text-[11px] font-semibold text-blue-700">🅿️ Parkhaus Zentrum Interlaken</div>
+            <div class="text-[11px] text-blue-600 mt-0.5">Central · ~20–25 CHF/day · Near Höhematte · Walk everywhere from here</div>
+            <div class="flex gap-1.5 mt-2 flex-wrap">
+              <a href="https://maps.google.com/?q=Parkhaus+Zentrum+Interlaken" target="_blank" class="chip bg-blue-100 text-blue-700">📍 Maps</a>
+              <span class="chip bg-green-50 text-green-700">🚻 Inside car park</span>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1.5">💡 Pro tip: Park once, walk everywhere. Don't move the car again in Interlaken.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-green-100 text-green-600">🌿</div>
+        <div>
+          <span class="text-[10px] font-bold text-green-500 uppercase">10:00 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Höhematte Park</h4>
+          <p class="text-xs text-slate-500 mt-1">Iconic open meadow with Jungfrau backdrop. Paragliders land here — kids will be absolutely fascinated! Free. No effort.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Hohematte+Park+Interlaken" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.instagram.com/explore/tags/interlaken/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #interlaken</a>
+          </div>
+          <div class="hbox bg-green-50 mt-2 text-[11px] text-green-700">
+            📸 <strong>Photo:</strong> Stand in the meadow, Jungfrau + paragliders in the sky behind you. Arms wide open = iconic Instagram shot.
+          </div>
+          <span class="chip bg-green-50 text-green-700 mt-2">🚻 Public toilets near park entrance</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-sky-100 text-sky-600">🔭</div>
+        <div>
+          <span class="text-[10px] font-bold text-sky-500 uppercase">11:00 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Harder Kulm Funicular 🚡</h4>
+          <p class="text-xs text-slate-500 mt-1">Best panoramic view in Interlaken. Funicular = 10 min, NO hiking. Panoramic platform overlooks both Lake Thun + Lake Brienz with Alps behind. Fully accessible for elderly.</p>
+          <div class="grid grid-cols-2 gap-2 mt-2">
+            <div class="hbox bg-sky-50 text-[11px] text-sky-700">
+              <div class="font-semibold">🎟️ Tickets</div>
+              <div class="mt-0.5">Adult: ~CHF 38<br>Child (6-15): ~CHF 19<br>6 adults+2 kids ≈ <strong>CHF 266</strong></div>
+            </div>
+            <div class="hbox bg-sky-50 text-[11px] text-sky-700">
+              <div class="font-semibold">⏰ Timing</div>
+              <div class="mt-0.5">Opens 9 AM<br>Last descent ~6 PM<br>Stay ~1.5 hrs</div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Harder+Kulm+Funicular+Interlaken" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=harder+kulm+interlaken+panorama" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+            <a href="https://www.instagram.com/explore/tags/harderkulm/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #harderkulm</a>
+          </div>
+          <div class="hbox bg-sky-50 mt-2 text-[11px] text-sky-700">
+            📸 <strong>Photo:</strong> Glass viewing platform edge — wide-angle captures both lakes. Best morning light. Group selfie + landscape = wall-worthy print.
+          </div>
+          <span class="chip bg-green-50 text-green-700 mt-2">🚻 At Harder Kulm restaurant (top)</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-orange-100 text-orange-500">🍽️</div>
+        <div>
+          <span class="text-[10px] font-bold text-orange-500 uppercase">13:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Lunch in Interlaken 🇮🇳</h4>
+          <p class="text-xs text-slate-500 mt-1">Interlaken has Indian restaurant options on the main Höheweg street. Also plenty of Swiss vegetarian-friendly options.</p>
+          <div class="space-y-2 mt-2">
+            <div class="hbox bg-orange-50 text-[11px] text-orange-700">
+              <div class="font-semibold">🇮🇳 Indian/Vegetarian Options</div>
+              <div class="mt-0.5">Search on Google Maps — there are Indian restaurants near Höheweg. Always call ahead to confirm vegetarian menu on the day.</div>
+              <a href="https://maps.google.com/?q=indian+vegetarian+restaurant+interlaken+switzerland" target="_blank" class="chip bg-orange-100 text-orange-700 mt-2">🔍 Search Indian Restaurants</a>
+            </div>
+            <div class="hbox bg-slate-50 text-[11px] text-slate-600">
+              <div class="font-semibold">🧀 Swiss Veggie Alternative</div>
+              <div class="mt-0.5">Rösti (potato cake), cheese fondue, mushroom dishes — very vegetarian-friendly and delicious!</div>
+              <a href="https://maps.google.com/?q=vegetarian+restaurant+interlaken+switzerland" target="_blank" class="chip bg-slate-100 text-slate-600 mt-2">🔍 Swiss Options</a>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1.5">💰 Budget: ~CHF 15–20/person · ~120–160 CHF total</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-purple-100 text-purple-500">🏘️</div>
+        <div>
+          <span class="text-[10px] font-bold text-purple-500 uppercase">15:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Unterseen Old Town (Hidden Gem!)</h4>
+          <p class="text-xs text-slate-500 mt-1">5 min walk from Interlaken center. Quiet, charming 17th-century Swiss village with no tourist crowds. Way more authentic than busy Höheweg.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Unterseen+Old+Town+Interlaken" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=unterseen+switzerland+village" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+            <a href="https://www.instagram.com/explore/tags/unterseen/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #unterseen</a>
+          </div>
+          <div class="hbox bg-purple-50 mt-2 text-[11px] text-purple-700">
+            📸 <strong>Photo:</strong> Narrow cobblestone lane framing the old church tower. Flower window boxes. Perfect travel aesthetic — quiet vs touristy.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-amber-100 text-amber-600">☕</div>
+        <div>
+          <span class="text-[10px] font-bold text-amber-600 uppercase">16:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Coffee Break</h4>
+          <p class="text-xs text-slate-500 mt-1">Pick up a café near Unterseen or back on Höheweg. Swiss hot chocolate = life-changing for kids. Rest feet before drive home.</p>
+          <a href="https://maps.google.com/?q=cafe+coffee+interlaken+switzerland" target="_blank" class="chip bg-amber-100 text-amber-600 mt-2">☕ Find Cafés</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-slate-100 text-slate-500">🏡</div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-400 uppercase">16:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Return to Merligen</h4>
+          <p class="text-xs text-slate-500 mt-1">20-min drive back. Evening relax + home-cooked dinner. Tomorrow is the highlight day — the WOW valley!</p>
+        </div>
+      </div>
+    </div><!-- /card -->
+
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-3">💰 Day 1 Budget</h3>
+      <div class="space-y-2 text-xs">
+        <div class="flex justify-between"><span class="text-slate-500">🅿️ Parkhaus Zentrum</span><span class="font-semibold">~20–25 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🚡 Harder Kulm (6A + 2C)</span><span class="font-semibold">~266 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🍽️ Lunch (8 people)</span><span class="font-semibold">120–160 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">☕ Coffee + Snacks</span><span class="font-semibold">40–60 CHF</span></div>
+        <div class="flex justify-between text-sm font-bold pt-2 border-t border-slate-100"><span>Total</span><span class="text-sky-600">~446–511 CHF</span></div>
+      </div>
+    </div>
+  </div><!-- /content-1-full -->
+
+  <!-- ACTIVE MODE (Day 1) -->
+  <div id="content-1-active" class="hidden">
+    <div class="banner bg-amber-50 border border-amber-100 mb-4">
+      <span class="text-xl flex-shrink-0">🏃</span>
+      <div class="text-xs text-amber-800"><strong>Active Mode:</strong> Elderly staying back today? Here's what to add for the energetic crew + teens.</div>
+    </div>
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-3">🔥 Active Add-ons for Day 1</h3>
+      <div class="space-y-3">
+        <div style="background:linear-gradient(135deg,#fff7ed,#fef3c7);" class="rounded-xl p-3 border border-orange-100">
+          <div class="font-semibold text-sm text-orange-700">🪂 Tandem Paragliding</div>
+          <p class="text-xs text-orange-600 mt-1">Interlaken is one of the top paragliding spots in the world. No experience needed — strapped to an expert. 15 min flight over the lakes and valleys.</p>
+          <div class="text-xs font-semibold text-orange-800 mt-1">Price: ~CHF 180/person · Great for adults &amp; 13yr-old (min weight/age applies)</div>
+          <div class="flex gap-1.5 mt-2 flex-wrap">
+            <a href="https://maps.google.com/?q=paragliding+Interlaken+Switzerland" target="_blank" class="chip bg-orange-100 text-orange-700">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=tandem+paragliding+interlaken" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,#eff6ff,#e0f2fe);" class="rounded-xl p-3 border border-blue-100">
+          <div class="font-semibold text-sm text-blue-700">⛵ Lake Brienz Boat Cruise</div>
+          <p class="text-xs text-blue-600 mt-1">Turquoise lake + glacial reflections + mountain walls. Dreamy alternative or addition to Harder Kulm afternoon.</p>
+          <div class="text-xs font-semibold text-blue-800 mt-1">Price: ~CHF 20/adult · Hourly departures from Interlaken Ost</div>
+          <a href="https://maps.google.com/?q=Lake+Brienz+boat+cruise+Interlaken" target="_blank" class="chip bg-blue-100 text-blue-700 mt-2">📍 Maps</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /day-1 -->
+
+
+<!-- ═══════════════════════════════
+     DAY 2 — LAUTERBRUNNEN
+═══════════════════════════════ -->
+<div id="day-2" class="day-section hidden">
+
+  <div class="rounded-2xl overflow-hidden mb-4 text-white" style="background:linear-gradient(135deg,#064e3b,#059669,#34d399);">
+    <div class="p-5">
+      <div class="text-[10px] uppercase tracking-widest text-emerald-200 mb-1">Day 2 · May 1, 2026</div>
+      <h2 class="playfair text-2xl font-bold mb-1">Lauterbrunnen 💧</h2>
+      <p class="text-emerald-200 text-sm">Merligen → Lauterbrunnen Valley → Trümmelbach Falls</p>
+      <div class="flex flex-wrap gap-2 mt-3">
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">72 waterfalls 🌊</span>
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">Fairytale valley ✨</span>
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">~30 km from base</span>
+      </div>
+    </div>
+    <a href="https://www.google.com/maps/dir/Merligen+Switzerland/Lauterbrunnen+Switzerland" target="_blank"
+       class="flex items-center justify-between px-5 py-3 bg-black/15 border-t border-white/10 text-sm text-emerald-100 no-underline">
+      <span>📍 Open Day 2 Route in Maps</span><span>↗</span>
+    </a>
+  </div>
+
+  <div class="mode-bar mb-4">
+    <button class="mode-btn active" onclick="setMode(2,'full')" id="mode-2-full">👨‍👩‍👧‍👦 Full Group</button>
+    <button class="mode-btn" onclick="setMode(2,'active')" id="mode-2-active">🏃 Active Mode</button>
+  </div>
+
+  <!-- FULL GROUP -->
+  <div id="content-2-full">
+
+    <div class="banner bg-emerald-50 border border-emerald-100 mb-4">
+      <span class="text-2xl flex-shrink-0">🌊</span>
+      <div class="text-xs text-emerald-700">
+        <strong>This is your WOW day!</strong> Lauterbrunnen has 72 waterfalls. May 1 = snow melt at its peak = maximum waterfall power. You literally couldn't have timed this better!
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-4 text-slate-700">📍 Day 2 Timeline</h3>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-yellow-100 text-yellow-600">🥚</div>
+        <div>
+          <span class="text-[10px] font-bold text-yellow-600 uppercase">08:30 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Home Breakfast</h4>
+          <p class="text-xs text-slate-500 mt-1">Fill up well — full day ahead. Pack light snacks and water bottles (Swiss tap water is perfect for refills).</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-slate-100 text-slate-500">🚗</div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-400 uppercase">09:15 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Drive to Lauterbrunnen (~30 min)</h4>
+          <p class="text-xs text-slate-500 mt-1">Via Interlaken. As you turn into the valley, vertical 1000m cliff walls appear on both sides. First-timers always gasp — be ready! 😄</p>
+          <div class="hbox bg-amber-50 mt-2 text-[11px] text-amber-700">
+            ⚠️ <strong>Arrive before 10:30 AM!</strong> Lauterbrunnen parking fills very fast in May. Being early is critical.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-blue-100 text-blue-600">🅿️</div>
+        <div>
+          <span class="text-[10px] font-bold text-blue-500 uppercase">09:50 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Park at Village Entrance</h4>
+          <div class="hbox bg-blue-50 mt-2">
+            <div class="text-[11px] font-semibold text-blue-700">🅿️ Parkplatz Lauterbrunnen (P1 / P2)</div>
+            <div class="text-[11px] text-blue-600 mt-0.5">Large car park at village entrance · ~CHF 15–20/day · Toilets right at entry</div>
+            <a href="https://maps.google.com/?q=Parkplatz+Lauterbrunnen+Switzerland" target="_blank" class="chip bg-blue-100 text-blue-700 mt-2">📍 Maps</a>
+          </div>
+          <span class="chip bg-green-50 text-green-700 mt-2">🚻 Toilets at car park entrance — use before walking</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-emerald-100 text-emerald-600">🌿</div>
+        <div>
+          <span class="text-[10px] font-bold text-emerald-500 uppercase">10:00 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Valley Walk + Village Stroll</h4>
+          <p class="text-xs text-slate-500 mt-1">Flat walking path through the valley. Swiss chalets everywhere, waterfalls dripping from cliff edges. The 6-year-old will think it's a fairy tale.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Lauterbrunnen+Valley+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=lauterbrunnen+valley+switzerland+spring+4k" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+            <a href="https://www.instagram.com/explore/tags/lauterbrunnen/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #lauterbrunnen</a>
+          </div>
+          <div class="hbox bg-emerald-50 mt-2 text-[11px] text-emerald-700">
+            📸 <strong>Iconic Shot:</strong> Stand in the center of the valley road looking toward the cliff walls — vertical rock + cascading waterfalls on both sides. Portrait format, maximum drama.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-blue-100 text-blue-500">💦</div>
+        <div>
+          <span class="text-[10px] font-bold text-blue-500 uppercase">10:45 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Staubbach Falls</h4>
+          <p class="text-xs text-slate-500 mt-1">297m waterfall dropping straight from the clifftop into the village. <strong>Free!</strong> Optional easy 10-min path up to the cave viewpoint behind the falls — unforgettable close-up.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Staubbach+Falls+Lauterbrunnen" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=staubbach+falls+lauterbrunnen" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+            <a href="https://www.instagram.com/explore/tags/staubbachfalls/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #staubbachfalls</a>
+          </div>
+          <div class="hbox bg-blue-50 mt-2 text-[11px] text-blue-700">
+            📸 <strong>Photo:</strong> Shoot from the road with entire waterfall in frame — village at bottom, cliff top at top. Include someone in the foreground for scale. Absolutely stunning.
+          </div>
+          <span class="chip bg-green-50 text-green-700 mt-2">🚻 Public toilet near falls viewpoint</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-cyan-100 text-cyan-600">🌀</div>
+        <div>
+          <span class="text-[10px] font-bold text-cyan-500 uppercase">12:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">⚡ Trümmelbach Falls (Unmissable!)</h4>
+          <p class="text-xs text-slate-500 mt-1">UNESCO-listed! Glacier meltwater crashing through tunnels INSIDE a mountain. Elevator access — perfect for elderly! The power and noise is unreal. Get slightly wet. Kids go wild.</p>
+          <div class="grid grid-cols-2 gap-2 mt-2">
+            <div class="hbox bg-cyan-50 text-[11px] text-cyan-700">
+              <div class="font-semibold">🎟️ Tickets</div>
+              <div class="mt-0.5">Adult: ~CHF 16<br>Child: ~CHF 8<br>6A+2C ≈ <strong>CHF 112</strong></div>
+            </div>
+            <div class="hbox bg-cyan-50 text-[11px] text-cyan-700">
+              <div class="font-semibold">⚠️ Important</div>
+              <div class="mt-0.5">Bring a jacket!<br>Gets very misty<br>~45 min visit</div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Trummelbach+Falls+Lauterbrunnen+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=trummelbach+falls+inside+mountain+switzerland" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+          </div>
+          <span class="chip bg-green-50 text-green-700 mt-2">🚻 At Trümmelbach entrance building</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-orange-100 text-orange-500">🍽️</div>
+        <div>
+          <span class="text-[10px] font-bold text-orange-500 uppercase">13:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Lunch in Lauterbrunnen</h4>
+          <p class="text-xs text-slate-500 mt-1">Limited Indian options here — Swiss restaurants are the smart choice. Rösti, pasta, cheese dishes are vegetarian-friendly and delicious.</p>
+          <div class="space-y-2 mt-2">
+            <a href="https://maps.google.com/?q=vegetarian+restaurant+Lauterbrunnen+Switzerland" target="_blank" class="chip bg-orange-100 text-orange-600">🔍 Find Restaurants</a>
+            <div class="hbox bg-orange-50 text-[11px] text-orange-700">
+              <strong>Look for:</strong> Any restaurant with "Rösti" or "Pasta" on the board. Restaurant Schützen and Restaurant Jungfrau are known options in the village.
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1.5">💰 Budget: ~CHF 120–160 for 8 people</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-purple-100 text-purple-500">☕</div>
+        <div>
+          <span class="text-[10px] font-bold text-purple-500 uppercase">15:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Coffee Break + Slow Valley Time</h4>
+          <p class="text-xs text-slate-500 mt-1">Don't rush out! Let the valley breathe. Kids play by the stream. Elderly sip coffee with a view. This unhurried time is actually the magic of Lauterbrunnen.</p>
+          <a href="https://maps.google.com/?q=cafe+Lauterbrunnen+Switzerland" target="_blank" class="chip bg-purple-100 text-purple-600 mt-2">☕ Find Cafés</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-slate-100 text-slate-500">🏡</div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-400 uppercase">16:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Return to Merligen</h4>
+          <p class="text-xs text-slate-500 mt-1">30-min drive back. Tired, wet from falls, full of memories. Home dinner + rest. Tomorrow is the flexible day.</p>
+        </div>
+      </div>
+    </div><!-- /card -->
+
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-3">💰 Day 2 Budget</h3>
+      <div class="space-y-2 text-xs">
+        <div class="flex justify-between"><span class="text-slate-500">🅿️ Parkplatz Lauterbrunnen</span><span class="font-semibold">~15–20 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🌀 Trümmelbach Falls (6A+2C)</span><span class="font-semibold">~112 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🍽️ Lunch (8 people)</span><span class="font-semibold">120–160 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">☕ Coffee + Snacks</span><span class="font-semibold">40–60 CHF</span></div>
+        <div class="flex justify-between text-sm font-bold pt-2 border-t border-slate-100"><span>Total</span><span class="text-emerald-600">~287–352 CHF</span></div>
+      </div>
+    </div>
+  </div><!-- /content-2-full -->
+
+  <!-- ACTIVE MODE (Day 2) -->
+  <div id="content-2-active" class="hidden">
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-3">🏃 Active Mode Extras — Day 2</h3>
+      <div class="space-y-3">
+        <div style="background:linear-gradient(135deg,#f5f3ff,#ede9fe);" class="rounded-xl p-3 border border-purple-100">
+          <div class="font-semibold text-sm text-purple-700">🚂 Train to Wengen (Car-Free Village!)</div>
+          <p class="text-xs text-purple-600 mt-1">No cars allowed in Wengen! Take the rack railway from Lauterbrunnen station. Village sits high on the cliff with jaw-dropping valley views looking DOWN at Lauterbrunnen.</p>
+          <div class="text-xs font-semibold text-purple-800 mt-1">~CHF 22 return/adult · 15 min ride · Perfect for teens</div>
+          <div class="flex gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Wengen+Switzerland" target="_blank" class="chip bg-purple-100 text-purple-700">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=wengen+switzerland+train+views" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);" class="rounded-xl p-3 border border-green-100">
+          <div class="font-semibold text-sm text-green-700">🥾 Valley Floor Trail (Easy Walk)</div>
+          <p class="text-xs text-green-600 mt-1">1-hour flat walk through valley following the glacial stream. Crystal-clear water. Kids love wading at safe points. Total fairy-tale scenery.</p>
+          <div class="text-xs font-semibold text-green-800 mt-1">Free · Flat terrain · Great for the 13yr-old</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /day-2 -->
+
+
+<!-- ═══════════════════════════════
+     DAY 3 — FLEX DAY
+═══════════════════════════════ -->
+<div id="day-3" class="day-section hidden">
+
+  <div class="rounded-2xl overflow-hidden mb-4 text-white" style="background:linear-gradient(135deg,#78350f,#d97706,#fbbf24);">
+    <div class="p-5">
+      <div class="text-[10px] uppercase tracking-widest text-amber-200 mb-1">Day 3 · May 2, 2026</div>
+      <h2 class="playfair text-2xl font-bold mb-1">Flexible Day 🌿</h2>
+      <p class="text-amber-200 text-sm">Choose your adventure based on energy &amp; weather</p>
+      <div class="flex flex-wrap gap-2 mt-3">
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">Option A: Grindelwald 🏔️</span>
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">Option B: Chill Day 🌊</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Option Toggle -->
+  <div class="mode-bar mb-4">
+    <button class="mode-btn active" onclick="setMode(3,'full')" id="mode-3-full">🏔️ Option A: Grindelwald</button>
+    <button class="mode-btn" onclick="setMode(3,'active')" id="mode-3-active">🌊 Option B: Chill Day</button>
+  </div>
+
+  <!-- OPTION A: GRINDELWALD -->
+  <div id="content-3-full">
+    <div class="banner bg-amber-50 border border-amber-100 mb-4">
+      <span class="text-xl flex-shrink-0">🏔️</span>
+      <div class="text-xs text-amber-800"><strong>Option A — Best on sunny day with good energy.</strong> Grindelwald + Iseltwald combo. If elderly want to skip, the younger crew can do First Cable Car while they relax.</div>
+    </div>
+
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-4 text-slate-700">📍 Grindelwald Timeline</h3>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-slate-100 text-slate-500">🚗</div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-400 uppercase">09:00 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Drive to Grindelwald (~45 min)</h4>
+          <p class="text-xs text-slate-500 mt-1">Via Interlaken. The Eiger North Face appears as you approach — imposing and thrilling. Road winds beautifully.</p>
+          <a href="https://www.google.com/maps/dir/Merligen+Switzerland/Grindelwald+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600 mt-2">📍 Route Map</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-blue-100 text-blue-600">🅿️</div>
+        <div>
+          <span class="text-[10px] font-bold text-blue-500 uppercase">09:50 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Park at Grindelwald Terminal</h4>
+          <div class="hbox bg-blue-50 mt-2">
+            <div class="text-[11px] font-semibold text-blue-700">🅿️ Grindelwald Terminal Parking</div>
+            <div class="text-[11px] text-blue-600 mt-0.5">Large underground car park · ~CHF 30–35/day · Direct gondola connection · Toilets, café inside</div>
+            <a href="https://maps.google.com/?q=Grindelwald+Terminal+Car+Park+Switzerland" target="_blank" class="chip bg-blue-100 text-blue-700 mt-2">📍 Maps</a>
+          </div>
+          <span class="chip bg-green-50 text-green-700 mt-2">🚻 Inside Terminal building</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-amber-100 text-amber-600">🚠</div>
+        <div>
+          <span class="text-[10px] font-bold text-amber-500 uppercase">10:15 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Grindelwald First — Cable Car 🏔️</h4>
+          <p class="text-xs text-slate-500 mt-1">State-of-the-art gondola to First station. Eiger, Mönch, Jungfrau panorama. Snow at the top in May — kids can play in snow! Cliff Walk accessible (metal walkway on cliff edge — thrilling).</p>
+          <div class="grid grid-cols-2 gap-2 mt-2">
+            <div class="hbox bg-amber-50 text-[11px] text-amber-700">
+              <div class="font-semibold">🎟️ Tickets</div>
+              <div class="mt-0.5">Adult: ~CHF 52<br>Child: ~CHF 26<br>6A+2C ≈ <strong>CHF 364</strong></div>
+            </div>
+            <div class="hbox bg-amber-50 text-[11px] text-amber-700">
+              <div class="font-semibold">🏔️ At First</div>
+              <div class="mt-0.5">Cliff Walk (free)<br>Mountain restaurant<br>Snow play area<br>Trottibike rental</div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Grindelwald+First+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=grindelwald+first+cliff+walk+switzerland" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+            <a href="https://www.instagram.com/explore/tags/grindelwald/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #grindelwald</a>
+          </div>
+          <div class="hbox bg-amber-50 mt-2 text-[11px] text-amber-700">
+            📸 <strong>Photo:</strong> Cliff Walk with Eiger's north face behind. Step on glass-floor sections. Family on the suspension bridge = iconic travel photo.
+          </div>
+          <span class="chip bg-green-50 text-green-700 mt-2">🚻 At First station building</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-orange-100 text-orange-500">🍽️</div>
+        <div>
+          <span class="text-[10px] font-bold text-orange-500 uppercase">13:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Lunch at First Mountain Restaurant</h4>
+          <p class="text-xs text-slate-500 mt-1">Restaurant at First station. Mountain views while eating. Swiss classics + pasta for kids. More expensive than valley but the setting is worth it for one meal.</p>
+          <p class="text-[11px] text-slate-400 mt-1">💰 Budget: ~CHF 25–30/person · ~200–240 CHF total</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-teal-100 text-teal-500">🏘️</div>
+        <div>
+          <span class="text-[10px] font-bold text-teal-500 uppercase">15:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Grindelwald Village Stroll</h4>
+          <p class="text-xs text-slate-500 mt-1">Walk through the village post-gondola. Traditional chalets, Eiger behind every corner. Short and sweet.</p>
+          <a href="https://maps.google.com/?q=Grindelwald+Village+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600 mt-2">📍 Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-pink-100 text-pink-500">💎</div>
+        <div>
+          <span class="text-[10px] font-bold text-pink-500 uppercase">16:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">📸 Bonus: Iseltwald Pier Stop</h4>
+          <p class="text-xs text-slate-500 mt-1">25-min detour on way home. The most Instagrammed spot in Switzerland — viral wooden pier over turquoise Lake Brienz. 10-minute stop = the best photo of your trip.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Iseltwald+Pier+Switzerland+Lake+Brienz" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=iseltwald+switzerland+lake+brienz+pier" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+            <a href="https://www.instagram.com/explore/tags/iseltwald/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #iseltwald</a>
+          </div>
+          <div class="hbox bg-pink-50 mt-2 text-[11px] text-pink-700">
+            📸 <strong>The Shot:</strong> Walk the entire pier, turn around — turquoise lake, village, mountains. Everyone in a line on the pier = absolute travel magic. Morning/evening = best light.
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <span class="chip bg-blue-50 text-blue-600">🅿️ Village parking (free/small)</span>
+            <span class="chip bg-green-50 text-green-700">🚻 Village café restrooms</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-slate-100 text-slate-500">🏡</div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-400 uppercase">17:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Return to Merligen</h4>
+          <p class="text-xs text-slate-500 mt-1">Iseltwald is ~15 min from Merligen. Easy drive home. Home dinner. Recharge for Lucerne tomorrow.</p>
+        </div>
+      </div>
+    </div><!-- /card -->
+
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-3">💰 Option A Budget (Grindelwald)</h3>
+      <div class="space-y-2 text-xs">
+        <div class="flex justify-between"><span class="text-slate-500">🅿️ Grindelwald Terminal</span><span class="font-semibold">~30–35 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🚠 First Cable Car (6A+2C)</span><span class="font-semibold">~364 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🍽️ Mountain Lunch (8 people)</span><span class="font-semibold">~200–240 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">☕ Snacks + Coffee</span><span class="font-semibold">~40 CHF</span></div>
+        <div class="flex justify-between text-sm font-bold pt-2 border-t border-slate-100"><span>Total</span><span class="text-amber-600">~634–679 CHF</span></div>
+      </div>
+    </div>
+  </div><!-- /option A -->
+
+  <!-- OPTION B: CHILL DAY -->
+  <div id="content-3-active" class="hidden">
+    <div class="banner bg-teal-50 border border-teal-100 mb-4">
+      <span class="text-xl flex-shrink-0">😌</span>
+      <div class="text-xs text-teal-800"><strong>Option B — The Wise Chill Day!</strong> If elderly need rest, weather is mixed, or energy is low after Lauterbrunnen. Iseltwald + Beatus Caves = zero effort, insane payoff.</div>
+    </div>
+
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-4 text-slate-700">📍 Chill Day Timeline</h3>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-yellow-100 text-yellow-600">🥚</div>
+        <div>
+          <span class="text-[10px] font-bold text-yellow-600 uppercase">09:30 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Late Relaxed Breakfast</h4>
+          <p class="text-xs text-slate-500 mt-1">No rush today! Long breakfast. Let everyone sleep in.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-pink-100 text-pink-500">💎</div>
+        <div>
+          <span class="text-[10px] font-bold text-pink-500 uppercase">10:30 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">📸 Iseltwald Village + Pier</h4>
+          <p class="text-xs text-slate-500 mt-1">Only 15 min from Merligen! The Squid Game Season 2 filming location — a wooden pier extending into impossibly turquoise Lake Brienz. Tiny village, zero crowds (morning!), dreamy.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Iseltwald+Switzerland+Lake+Brienz" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=iseltwald+switzerland+lake+brienz" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+            <a href="https://www.instagram.com/explore/tags/iseltwald/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #iseltwald</a>
+          </div>
+          <div class="hbox bg-pink-50 mt-2 text-[11px] text-pink-700">
+            📸 <strong>The Shot:</strong> Walk out on the pier, turn back to village — Lake Brienz below in turquoise glory. Best photo of the whole trip is here.
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <span class="chip bg-blue-50 text-blue-600">🅿️ Village lot (free / small fee)</span>
+            <span class="chip bg-green-50 text-green-700">🚻 Village café</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-teal-100 text-teal-500">🦇</div>
+        <div>
+          <span class="text-[10px] font-bold text-teal-500 uppercase">12:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">St. Beatus Caves</h4>
+          <p class="text-xs text-slate-500 mt-1">Ancient caves above Lake Thun — literally 5 min from Merligen! 700m of illuminated tunnels with stalactites. Legend of a dragon slain here by St. Beatus. Elevator access — perfect for elderly. Kids are obsessed.</p>
+          <div class="grid grid-cols-2 gap-2 mt-2">
+            <div class="hbox bg-teal-50 text-[11px] text-teal-700">
+              <div class="font-semibold">🎟️ Tickets</div>
+              <div class="mt-0.5">Adult: ~CHF 20<br>Child: ~CHF 10<br>6A+2C ≈ <strong>CHF 140</strong></div>
+            </div>
+            <div class="hbox bg-teal-50 text-[11px] text-teal-700">
+              <div class="font-semibold">⚠️ Tips</div>
+              <div class="mt-0.5">Inside: 8–10°C<br>Bring a jacket!<br>~1 hour visit<br>Restaurant outside</div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=St+Beatus+Caves+Lake+Thun+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=st+beatus+caves+switzerland+inside" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+          </div>
+          <span class="chip bg-green-50 text-green-700 mt-2">🚻 At cave entrance building</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-orange-100 text-orange-500">🍽️</div>
+        <div>
+          <span class="text-[10px] font-bold text-orange-500 uppercase">13:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Lunch at Beatus or Home</h4>
+          <p class="text-xs text-slate-500 mt-1">Restaurant Beatus near the caves has spectacular lake views. Or drive 5 min home for a relaxed home lunch — your call!</p>
+          <a href="https://maps.google.com/?q=Restaurant+Beatus+Merligen+Switzerland" target="_blank" class="chip bg-orange-100 text-orange-600 mt-2">📍 Restaurant on Maps</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-sky-100 text-sky-500">🌊</div>
+        <div>
+          <span class="text-[10px] font-bold text-sky-500 uppercase">15:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Lake Thun Afternoon — Pure Bliss</h4>
+          <p class="text-xs text-slate-500 mt-1">Back to base. Lakeside afternoon. Kids skip stones. Elderly sip tea on the terrace. Adults nap. This unhurried time IS the Switzerland experience.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-purple-100 text-purple-500">🌅</div>
+        <div>
+          <span class="text-[10px] font-bold text-purple-500 uppercase">19:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Sunset + Last Home Dinner</h4>
+          <p class="text-xs text-slate-500 mt-1">Final proper home dinner together. Pack bags tonight — Lucerne + departure tomorrow.</p>
+        </div>
+      </div>
+    </div><!-- /card -->
+
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-3">💰 Option B Budget (Chill Day)</h3>
+      <div class="space-y-2 text-xs">
+        <div class="flex justify-between"><span class="text-slate-500">🅿️ Iseltwald (free/small)</span><span class="font-semibold">~0–5 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🦇 St. Beatus Caves (6A+2C)</span><span class="font-semibold">~140 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🍽️ Lunch (eat out or home)</span><span class="font-semibold">60–150 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">☕ Snacks + Coffee</span><span class="font-semibold">~30–40 CHF</span></div>
+        <div class="flex justify-between text-sm font-bold pt-2 border-t border-slate-100"><span>Total</span><span class="text-teal-600">~230–335 CHF</span></div>
+      </div>
+    </div>
+  </div><!-- /option B -->
+
+</div><!-- /day-3 -->
+
+
+<!-- ═══════════════════════════════
+     DAY 4 — LUCERNE + DEPARTURE
+═══════════════════════════════ -->
+<div id="day-4" class="day-section hidden">
+
+  <div class="rounded-2xl overflow-hidden mb-4 text-white" style="background:linear-gradient(135deg,#881337,#e11d48,#fb7185);">
+    <div class="p-5">
+      <div class="text-[10px] uppercase tracking-widest text-rose-200 mb-1">Day 4 · May 3, 2026</div>
+      <h2 class="playfair text-2xl font-bold mb-1">Lucerne + Departure 🌉</h2>
+      <p class="text-rose-200 text-sm">Merligen → Lucerne → Zurich Airport ✈️</p>
+      <div class="flex flex-wrap gap-2 mt-3">
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">~200 km total</span>
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full pulse">✈️ Flight 19:25</span>
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">At airport by 17:00</span>
+      </div>
+    </div>
+    <a href="https://www.google.com/maps/dir/Merligen+Switzerland/Lucerne+Switzerland/Zurich+Airport" target="_blank"
+       class="flex items-center justify-between px-5 py-3 bg-black/15 border-t border-white/10 text-sm text-rose-100 no-underline">
+      <span>📍 Open Full Day Route in Maps</span><span>↗</span>
+    </a>
+  </div>
+
+  <div class="mode-bar mb-4">
+    <button class="mode-btn active" onclick="setMode(4,'full')" id="mode-4-full">👨‍👩‍👧‍👦 Full Group</button>
+    <button class="mode-btn" onclick="setMode(4,'active')" id="mode-4-active">🏃 Active Mode</button>
+  </div>
+
+  <!-- Departure Warning -->
+  <div class="banner bg-rose-50 border border-rose-200 mb-4">
+    <span class="text-xl flex-shrink-0">⚠️</span>
+    <div class="text-xs text-rose-700">
+      <strong>Key timings:</strong> Check out by 10:00 · Leave Lucerne by 15:00 · Reach ZRH by 16:30 · Car return done by 17:00 · Flight 19:25 (at gate by 18:45).
+    </div>
+  </div>
+
+  <!-- FULL GROUP -->
+  <div id="content-4-full">
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-4 text-slate-700">📍 Day 4 Timeline</h3>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-yellow-100 text-yellow-600">🥚</div>
+        <div>
+          <span class="text-[10px] font-bold text-yellow-600 uppercase">07:30 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Early Breakfast + Final Pack</h4>
+          <p class="text-xs text-slate-500 mt-1">Use up remaining groceries. Bags packed the night before. Check-out by 10:00 AM sharp.</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-slate-100 text-slate-500">🚗</div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-400 uppercase">09:30 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Drive to Lucerne (~1.5 hrs)</h4>
+          <p class="text-xs text-slate-500 mt-1">A8 → A2 highway. Passes through beautiful mountain scenery. Final drive of the trip — enjoy it!</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-blue-100 text-blue-600">🅿️</div>
+        <div>
+          <span class="text-[10px] font-bold text-blue-500 uppercase">11:00 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Park in Lucerne</h4>
+          <div class="hbox bg-blue-50 mt-2">
+            <div class="text-[11px] font-semibold text-blue-700">🅿️ Parkhaus Kesselturm (recommended)</div>
+            <div class="text-[11px] text-blue-600 mt-0.5">~500m walk to old town · ~CHF 3/hr · 24/7 open</div>
+            <a href="https://maps.google.com/?q=parking+Lucerne+old+town+Switzerland" target="_blank" class="chip bg-blue-100 text-blue-700 mt-2">📍 Find Lucerne Parking</a>
+          </div>
+          <span class="chip bg-green-50 text-green-700 mt-2">🚻 Public toilets at Bahnhofplatz (5 min walk)</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-rose-100 text-rose-500">🌉</div>
+        <div>
+          <span class="text-[10px] font-bold text-rose-500 uppercase">11:15 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Chapel Bridge (Kapellbrücke)</h4>
+          <p class="text-xs text-slate-500 mt-1">Europe's oldest covered wooden bridge (1333 AD). Flower boxes, painted ceiling panels, water tower. Walk across it both ways — stunning from every angle. Free.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Chapel+Bridge+Lucerne+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=chapel+bridge+lucerne+switzerland" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+            <a href="https://www.instagram.com/explore/tags/chapelbridge/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #kapellbrücke</a>
+          </div>
+          <div class="hbox bg-rose-50 mt-2 text-[11px] text-rose-700">
+            📸 <strong>Photo:</strong> Shoot bridge from 45° angle — shows length + water tower + mountain backdrop. Include family walking on bridge. Golden Swiss postcard shot.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-amber-100 text-amber-500">🏛️</div>
+        <div>
+          <span class="text-[10px] font-bold text-amber-500 uppercase">11:45 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Lucerne Old Town Stroll</h4>
+          <p class="text-xs text-slate-500 mt-1">Colorful painted facades, murals on buildings, cobblestone streets. Very walkable and safe for kids. Window shopping — Swiss watches and chocolate everywhere.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Lucerne+Old+Town+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.instagram.com/explore/tags/lucerneoldtown/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #lucerne</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-gray-100 text-gray-600">🦁</div>
+        <div>
+          <span class="text-[10px] font-bold text-gray-500 uppercase">12:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Lion Monument (Löwendenkmal)</h4>
+          <p class="text-xs text-slate-500 mt-1">Mark Twain called it "the most mournful and moving piece of stone in the world." 9-meter dying lion carved into a cliff face. Free, 10 min walk from old town. Deeply touching.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Lion+Monument+Lucerne+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=lion+monument+lucerne+switzerland" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+          </div>
+          <div class="hbox bg-gray-50 mt-2 text-[11px] text-gray-600">
+            📸 <strong>Photo:</strong> Close-up portrait shot of the lion from slightly below. Soft light. This one is for emotional impact, not Instagram grid. 🦁
+          </div>
+          <span class="chip bg-green-50 text-green-700 mt-2">🚻 Public toilet at park entrance</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-orange-100 text-orange-500">🍽️</div>
+        <div>
+          <span class="text-[10px] font-bold text-orange-500 uppercase">13:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Final Lunch in Lucerne 🇮🇳</h4>
+          <p class="text-xs text-slate-500 mt-1">Lucerne has excellent Indian restaurant options! Much bigger city than Interlaken. Perfect for a celebratory final meal before the airport.</p>
+          <div class="space-y-2 mt-2">
+            <a href="https://maps.google.com/?q=indian+vegetarian+restaurant+Lucerne+Switzerland" target="_blank" class="chip bg-orange-100 text-orange-600">🔍 Indian Restaurants in Lucerne</a>
+            <div class="hbox bg-orange-50 text-[11px] text-orange-700">
+              <strong>Tip:</strong> Several Indian restaurants near Lucerne train station and old town. Search on Google Maps for current ratings and "vegetarian" filter. Book ahead if possible!
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1.5">💰 Budget: ~CHF 120–160 for 8 people · Leave by 15:00!</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-slate-100 text-slate-500">🚗</div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-400 uppercase">15:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Drive to Zurich Airport (~1 hr)</h4>
+          <p class="text-xs text-slate-500 mt-1">A14 → A1 to ZRH. Follow signs for "Autovermietung / Car Rental Return" at airport. Allow extra time for luggage.</p>
+          <div class="hbox bg-rose-50 mt-2 text-[11px] text-rose-700">
+            ⚠️ <strong>Return car at least 2.5 hrs before flight.</strong> Keep hold of your luggage + documents after car return. Airport check-in closes 60 min before departure.
+          </div>
+          <a href="https://www.google.com/maps/dir/Lucerne+Switzerland/Zurich+Airport" target="_blank" class="chip bg-slate-100 text-slate-600 mt-2">📍 Route to ZRH</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-indigo-100 text-indigo-600">✈️</div>
+        <div>
+          <span class="text-[10px] font-bold text-indigo-500 uppercase">19:25 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Departure — ZRH → AMS 🛫</h4>
+          <p class="text-xs text-slate-500 mt-1">Estimated arrival Amsterdam ~21:10 local time. Switzerland memories: lifetime supply. ❤️🇨🇭</p>
+        </div>
+      </div>
+    </div><!-- /card -->
+
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-3">💰 Day 4 Budget</h3>
+      <div class="space-y-2 text-xs">
+        <div class="flex justify-between"><span class="text-slate-500">⛽ Fuel (Merligen→Luc→ZRH)</span><span class="font-semibold">~30–40 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🅿️ Lucerne (~2.5 hrs)</span><span class="font-semibold">~8–12 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🍽️ Final Lunch (Indian!)</span><span class="font-semibold">~120–160 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🍫 Chocolates + Souvenirs</span><span class="font-semibold">~50–80 CHF</span></div>
+        <div class="flex justify-between text-sm font-bold pt-2 border-t border-slate-100"><span>Total</span><span class="text-rose-600">~208–292 CHF</span></div>
+      </div>
+    </div>
+  </div><!-- /content-4-full -->
+
+  <!-- ACTIVE MODE (Day 4) -->
+  <div id="content-4-active" class="hidden">
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-3">🏃 Active Mode Extras — Day 4</h3>
+      <div class="space-y-3">
+        <div style="background:linear-gradient(135deg,#eff6ff,#dbeafe);" class="rounded-xl p-3 border border-blue-100">
+          <div class="font-semibold text-sm text-blue-700">⛵ Lake Lucerne Short Cruise</div>
+          <p class="text-xs text-blue-600 mt-1">If time allows after Lion Monument, a quick 1-hr boat ride on Lake Lucerne gives you the city skyline + mountains from the water. Spectacular.</p>
+          <div class="text-xs font-semibold text-blue-800 mt-1">~CHF 25/adult · Hourly departures · Only if leaving by 13:45!</div>
+          <a href="https://maps.google.com/?q=Lake+Lucerne+boat+cruise+Switzerland" target="_blank" class="chip bg-blue-100 text-blue-700 mt-2">📍 Maps</a>
+        </div>
+        <div style="background:linear-gradient(135deg,#fffbeb,#fef3c7);" class="rounded-xl p-3 border border-amber-100">
+          <div class="font-semibold text-sm text-amber-700">🍫 Swiss Chocolate Shopping</div>
+          <p class="text-xs text-amber-600 mt-1">Lucerne old town has outstanding chocolate shops. Lindt, Läderach, local artisan shops. Stock up on authentic Swiss chocolate for family back home.</p>
+          <div class="text-xs text-amber-700 mt-1">Budget: ~CHF 30–60 for gifts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /day-4 -->
+
+
+<!-- ═══════════════════════════════
+     BUDGET SUMMARY SECTION
+═══════════════════════════════ -->
+<div id="budget-summary" class="hidden">
+
+  <!-- Header -->
+  <div class="rounded-2xl overflow-hidden mb-4 text-white" style="background:linear-gradient(135deg,#0f2744,#1a3a5c,#2a5580);">
+    <div class="p-5">
+      <div class="text-[10px] uppercase tracking-widest text-blue-200 mb-1">Full Trip</div>
+      <h2 class="playfair text-2xl font-bold mb-1">Budget Overview 💰</h2>
+      <p class="text-blue-200 text-sm">8 people · 5 days · Excluding flights &amp; accommodation</p>
+    </div>
+  </div>
+
+  <!-- Breakdown -->
+  <div class="card">
+    <h3 class="font-semibold text-sm mb-4 text-slate-700">📊 Category Breakdown</h3>
+    <div class="space-y-4">
+      <div>
+        <div class="flex justify-between text-xs mb-1">
+          <span class="text-slate-500">⛽ Total Fuel (~400 km round)</span>
+          <span class="font-semibold">60–90 CHF</span>
+        </div>
+        <div class="bbar"><div class="bfill bg-amber-400" style="width:8%"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between text-xs mb-1">
+          <span class="text-slate-500">🅿️ Total Parking (4 days)</span>
+          <span class="font-semibold">60–80 CHF</span>
+        </div>
+        <div class="bbar"><div class="bfill bg-blue-400" style="width:8%"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between text-xs mb-1">
+          <span class="text-slate-500">🎢 Activities (all days combined)</span>
+          <span class="font-semibold">500–850 CHF</span>
+        </div>
+        <div class="bbar"><div class="bfill bg-purple-400" style="width:65%"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between text-xs mb-1">
+          <span class="text-slate-500">🍽️ Lunches out (4 days × 8 people)</span>
+          <span class="font-semibold">480–640 CHF</span>
+        </div>
+        <div class="bbar"><div class="bfill bg-orange-400" style="width:55%"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between text-xs mb-1">
+          <span class="text-slate-500">🛒 Groceries (breakfast + dinner)</span>
+          <span class="font-semibold">200–260 CHF</span>
+        </div>
+        <div class="bbar"><div class="bfill bg-green-400" style="width:25%"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between text-xs mb-1">
+          <span class="text-slate-500">☕ Snacks + Coffee (all days)</span>
+          <span class="font-semibold">150–200 CHF</span>
+        </div>
+        <div class="bbar"><div class="bfill bg-yellow-400" style="width:18%"></div></div>
+      </div>
+      <div>
+        <div class="flex justify-between text-xs mb-1">
+          <span class="text-slate-500">🍫 Souvenirs + Chocolates</span>
+          <span class="font-semibold">50–80 CHF</span>
+        </div>
+        <div class="bbar"><div class="bfill bg-pink-400" style="width:7%"></div></div>
+      </div>
+
+      <div class="border-t-2 border-slate-200 pt-3 mt-2">
+        <div class="flex justify-between items-center">
+          <span class="font-semibold text-slate-700">Estimated Total</span>
+          <div class="text-right">
+            <div class="text-xl font-bold text-alpine">1,500–2,200 CHF</div>
+            <div class="text-xs text-slate-400">≈ €1,550–€2,280</div>
+          </div>
+        </div>
+        <div class="hbox bg-indigo-50 mt-3 text-[11px] text-indigo-700">
+          🤯 <strong>Per person: ~CHF 190–280 for the ENTIRE 5-day trip.</strong> Switzerland on a real family budget. Cooking at home + renting a car = the magic formula!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day-by-day quick view -->
+  <div class="card">
+    <h3 class="font-semibold text-sm mb-3">📅 Day-by-Day Quick Budget</h3>
+    <div class="space-y-2 text-xs">
+      <div class="flex justify-between p-2 bg-indigo-50 rounded-lg"><span class="text-indigo-700">Day 0 — Arrival</span><span class="font-semibold text-indigo-800">305–415 CHF</span></div>
+      <div class="flex justify-between p-2 bg-sky-50 rounded-lg"><span class="text-sky-700">Day 1 — Interlaken</span><span class="font-semibold text-sky-800">446–511 CHF</span></div>
+      <div class="flex justify-between p-2 bg-emerald-50 rounded-lg"><span class="text-emerald-700">Day 2 — Lauterbrunnen</span><span class="font-semibold text-emerald-800">287–352 CHF</span></div>
+      <div class="flex justify-between p-2 bg-amber-50 rounded-lg"><span class="text-amber-700">Day 3 — Flex (Option A)</span><span class="font-semibold text-amber-800">634–679 CHF</span></div>
+      <div class="flex justify-between p-2 bg-amber-50 rounded-lg"><span class="text-amber-700">Day 3 — Flex (Option B)</span><span class="font-semibold text-amber-800">230–335 CHF</span></div>
+      <div class="flex justify-between p-2 bg-rose-50 rounded-lg"><span class="text-rose-700">Day 4 — Lucerne</span><span class="font-semibold text-rose-800">208–292 CHF</span></div>
+    </div>
+  </div>
+
+  <!-- Savings Tips -->
+  <div class="card">
+    <h3 class="font-semibold text-sm mb-3">💡 Smart Savings Tips</h3>
+    <div class="space-y-2 text-xs text-slate-600">
+      <div class="flex items-start gap-2"><span class="text-green-500 flex-shrink-0">✅</span><span>One big grocery run on Day 0 — bulk buying saves ~30% vs daily shopping.</span></div>
+      <div class="flex items-start gap-2"><span class="text-green-500 flex-shrink-0">✅</span><span>Skip Jungfraujoch — adds 600+ CHF for the group, exhausting for kids/elderly, and your plan already has better value.</span></div>
+      <div class="flex items-start gap-2"><span class="text-green-500 flex-shrink-0">✅</span><span>Swiss tap water is excellent everywhere — refill bottles instead of buying.</span></div>
+      <div class="flex items-start gap-2"><span class="text-green-500 flex-shrink-0">✅</span><span>Fuel up near Interlaken — cheaper than mountain towns. Fill the tank once every 2 days.</span></div>
+      <div class="flex items-start gap-2"><span class="text-green-500 flex-shrink-0">✅</span><span>Parking: always use paid lots (fines in Switzerland are brutal — ~100 CHF). Budget is already included.</span></div>
+      <div class="flex items-start gap-2"><span class="text-green-500 flex-shrink-0">✅</span><span>Day 3 chill option saves ~300–400 CHF vs Grindelwald. Consider it if energy is low after Lauterbrunnen!</span></div>
+    </div>
+  </div>
+
+  <!-- Emergency Info -->
+  <div class="card" style="background:linear-gradient(135deg,#fef2f2,#fff);" >
+    <h3 class="font-semibold text-sm mb-3 text-red-700">🚨 Emergency Numbers</h3>
+    <div class="grid grid-cols-2 gap-2 text-xs">
+      <a href="tel:144" class="flex justify-between p-2 bg-red-50 rounded-lg no-underline"><span class="text-red-600">🚑 Ambulance</span><span class="font-bold text-red-800">144</span></a>
+      <a href="tel:117" class="flex justify-between p-2 bg-red-50 rounded-lg no-underline"><span class="text-red-600">🚓 Police</span><span class="font-bold text-red-800">117</span></a>
+      <a href="tel:118" class="flex justify-between p-2 bg-red-50 rounded-lg no-underline"><span class="text-red-600">🚒 Fire</span><span class="font-bold text-red-800">118</span></a>
+      <a href="tel:1414" class="flex justify-between p-2 bg-red-50 rounded-lg no-underline"><span class="text-red-600">🏔️ Mountain Rescue</span><span class="font-bold text-red-800">1414</span></a>
+      <a href="tel:112" class="flex justify-between p-2 bg-red-50 rounded-lg col-span-2 no-underline"><span class="text-red-600">📞 General Emergency (EU)</span><span class="font-bold text-red-800">112</span></a>
+    </div>
+  </div>
+
+  <!-- Weather & Packing -->
+  <div class="card bg-sky-50 border border-sky-100">
+    <h3 class="font-semibold text-sm mb-3 text-sky-700">🌤️ Late April / May Weather Tips</h3>
+    <div class="space-y-2 text-xs text-sky-700">
+      <div class="flex items-start gap-2"><span>🌡️</span><span>Valley temp: 10–18°C. Mountain tops: 0–5°C. Layers are essential.</span></div>
+      <div class="flex items-start gap-2"><span>❄️</span><span>Grindelwald First / Harder Kulm tops: still cold, possibly snow. Warm jacket for mountain excursions.</span></div>
+      <div class="flex items-start gap-2"><span>🌧️</span><span>Spring showers possible. Pack a light waterproof jacket for everyone (foldable ones = ideal).</span></div>
+      <div class="flex items-start gap-2"><span>💧</span><span>Waterfalls at MAXIMUM flow in May — snow melt at its best. Perfect timing!</span></div>
+      <div class="flex items-start gap-2"><span>👟</span><span>Comfortable walking shoes for everyone, including elderly. Some paths can be slightly muddy.</span></div>
+      <div class="flex items-start gap-2"><span>🕶️</span><span>Sunscreen + sunglasses — mountain UV is much stronger than at sea level!</span></div>
+    </div>
+  </div>
+
+</div><!-- /budget-summary -->
+
+
+</div><!-- /main content -->
+
+
+<!-- ══════════════════════════════════════════
+     BOTTOM NAV BAR
+══════════════════════════════════════════ -->
+<div class="bottom-bar">
+  <div class="flex gap-1 max-w-lg mx-auto">
+    <button onclick="showDay(0)" class="flex-1 flex flex-col items-center text-[10px] text-slate-400 gap-0.5 py-1">
+      <span class="text-base">✈️</span><span>Arrival</span>
+    </button>
+    <button onclick="showDay(2)" class="flex-1 flex flex-col items-center text-[10px] text-slate-400 gap-0.5 py-1">
+      <span class="text-base">💧</span><span>Valley</span>
+    </button>
+    <button onclick="showBudget()" class="flex-1 flex flex-col items-center text-[10px] gap-0.5 py-1 text-slate-400" id="budget-btn">
+      <span class="text-base">💰</span><span>Budget</span>
+    </button>
+    <a href="https://maps.google.com/?q=Merligen+Switzerland+Lake+Thun" target="_blank" class="flex-1 flex flex-col items-center text-[10px] text-slate-400 gap-0.5 py-1 no-underline">
+      <span class="text-base">🏡</span><span>Home Base</span>
+    </a>
+    <a href="tel:112" class="flex-1 flex flex-col items-center text-[10px] text-red-400 gap-0.5 py-1 no-underline">
+      <span class="text-base">🆘</span><span>Emergency</span>
+    </a>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+  const DAY_COLORS = {
+    0: '#4338ca',
+    1: '#0284c7',
+    2: '#059669',
+    3: '#d97706',
+    4: '#e11d48'
+  };
+
+  let currentDay = 0;
+  let budgetVisible = false;
+
+  // ─── Show Day ───
+  function showDay(day) {
+    // hide all
+    for (let i = 0; i <= 4; i++) {
+      const el = document.getElementById(`day-${i}`);
+      const tab = document.getElementById(`tab-${i}`);
+      if (el) el.classList.add('hidden');
+      if (tab) {
+        tab.classList.remove('active');
+        tab.style.background = '#f1f5f9';
+        tab.style.color = '#64748b';
+        tab.style.boxShadow = 'none';
+      }
+    }
+    // hide budget
+    const b = document.getElementById('budget-summary');
+    if (b) b.classList.add('hidden');
+    budgetVisible = false;
+    document.getElementById('budget-btn').style.color = '#94a3b8';
+
+    // show selected
+    const target = document.getElementById(`day-${day}`);
+    const targetTab = document.getElementById(`tab-${day}`);
+    if (target) { target.classList.remove('hidden'); }
+    if (targetTab) {
+      targetTab.classList.add('active');
+      targetTab.style.background = DAY_COLORS[day];
+      targetTab.style.color = 'white';
+    }
+    currentDay = day;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ─── Set Mode ───
+  function setMode(day, mode) {
+    const fullBtn = document.getElementById(`mode-${day}-full`);
+    const activeBtn = document.getElementById(`mode-${day}-active`);
+    const fullContent = document.getElementById(`content-${day}-full`);
+    const activeContent = document.getElementById(`content-${day}-active`);
+
+    if (mode === 'full') {
+      fullBtn.classList.add('active');
+      activeBtn.classList.remove('active');
+      if (fullContent) fullContent.classList.remove('hidden');
+      if (activeContent) activeContent.classList.add('hidden');
+    } else {
+      activeBtn.classList.add('active');
+      fullBtn.classList.remove('active');
+      if (activeContent) activeContent.classList.remove('hidden');
+      if (fullContent) fullContent.classList.add('hidden');
+    }
+  }
+
+  // ─── Show Budget ───
+  function showBudget() {
+    const b = document.getElementById('budget-summary');
+    if (!budgetVisible) {
+      for (let i = 0; i <= 4; i++) {
+        const el = document.getElementById(`day-${i}`);
+        const tab = document.getElementById(`tab-${i}`);
+        if (el) el.classList.add('hidden');
+        if (tab) {
+          tab.classList.remove('active');
+          tab.style.background = '#f1f5f9';
+          tab.style.color = '#64748b';
+          tab.style.boxShadow = 'none';
+        }
+      }
+      b.classList.remove('hidden');
+      budgetVisible = true;
+      document.getElementById('budget-btn').style.color = '#1a3a5c';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      b.classList.add('hidden');
+      budgetVisible = false;
+      document.getElementById('budget-btn').style.color = '#94a3b8';
+      showDay(currentDay);
+    }
+  }
+
+  // ─── Generate Stars ───
+  function createStars() {
+    const container = document.getElementById('stars');
+    if (!container) return;
+    for (let i = 0; i < 40; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const size = Math.random() * 2 + 1;
+      s.style.cssText = `
+        width:${size}px; height:${size}px;
+        left:${Math.random() * 100}%;
+        top:${Math.random() * 70}%;
+        animation-delay:${Math.random() * 3}s;
+        animation-duration:${Math.random() * 2 + 2}s;
+      `;
+      container.appendChild(s);
+    }
+  }
+
+  // ─── Generate Snow ───
+  function createSnow() {
+    const container = document.getElementById('snow-container');
+    if (!container) return;
+    for (let i = 0; i < 18; i++) {
+      const f = document.createElement('div');
+      f.className = 'snowflake';
+      const size = Math.random() * 3 + 2;
+      f.style.cssText = `
+        width:${size}px; height:${size}px;
+        left:${Math.random() * 100}%;
+        animation-duration:${Math.random() * 5 + 4}s;
+        animation-delay:${Math.random() * 6}s;
+      `;
+      container.appendChild(f);
+    }
+  }
+
+  // ─── Init ───
+  document.addEventListener('DOMContentLoaded', () => {
+    createStars();
+    createSnow();
+    showDay(0);
+  });
+</script>
+
+</body>
+</html>
