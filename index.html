@@ -131,6 +131,29 @@
     /* Pulse badge */
     @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
     .pulse { animation: pulse 2s ease-in-out infinite; }
+
+    /* Ticket toggle */
+    .tkt-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px; border-radius: 10px; font-size: 11px; font-weight: 600;
+      background: #fffbeb; color: #92400e;
+      border: 1.5px dashed #fbbf24; cursor: pointer; margin-top: 8px;
+      transition: background 0.15s;
+    }
+    .tkt-btn:active { background: #fef3c7; }
+    .tkt-box {
+      margin-top: 8px; border-radius: 12px; padding: 10px 12px;
+      background: #fffbeb; border: 1.5px solid #fde68a;
+    }
+    .tkt-link {
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 9px 12px; border-radius: 10px; font-size: 12px; font-weight: 700;
+      background: #f59e0b; color: white; text-decoration: none; width: 100%;
+    }
+    .tkt-link:active { background: #d97706; }
+    .tkt-onsite {
+      font-size: 11px; color: #92400e; text-align: center; padding: 6px 0 2px;
+    }
   </style>
 </head>
 <body>
@@ -693,6 +716,17 @@
             📸 <strong>Photo:</strong> Glass viewing platform edge — wide-angle captures both lakes. Best morning light. Group selfie + landscape = wall-worthy print.
           </div>
           <span class="chip bg-green-50 text-green-700 mt-2">🚻 At Harder Kulm restaurant (top)</span>
+          <div>
+            <button class="tkt-btn" onclick="toggleTicket('harder-kulm')">
+              🎟️ Buy Tickets <span id="tkt-arrow-harder-kulm">▾</span>
+            </button>
+            <div id="tkt-harder-kulm" class="tkt-box hidden">
+              <a href="https://www.jungfrau.ch/en-gb/prices-and-tickets/" target="_blank" rel="noopener" class="tkt-link">
+                🔗 Official Booking — jungfrau.ch ↗
+              </a>
+              <p class="tkt-onsite">Opens Jungfrau Railways website in a new tab · Online booking available</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -929,6 +963,17 @@
             <a href="https://www.youtube.com/results?search_query=trummelbach+falls+inside+mountain+switzerland" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
           </div>
           <span class="chip bg-green-50 text-green-700 mt-2">🚻 At Trümmelbach entrance building</span>
+          <div>
+            <button class="tkt-btn" onclick="toggleTicket('truemmelbach')">
+              🎟️ Ticket Info <span id="tkt-arrow-truemmelbach">▾</span>
+            </button>
+            <div id="tkt-truemmelbach" class="tkt-box hidden">
+              <a href="https://www.truemmelbachfaelle.ch/e/" target="_blank" rel="noopener" class="tkt-link">
+                🔗 Official Website — truemmelbachfaelle.ch ↗
+              </a>
+              <p class="tkt-onsite">⚠️ No online booking — tickets bought at entrance only · Cash or card accepted</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1088,6 +1133,17 @@
             📸 <strong>Photo:</strong> Cliff Walk with Eiger's north face behind. Step on glass-floor sections. Family on the suspension bridge = iconic travel photo.
           </div>
           <span class="chip bg-green-50 text-green-700 mt-2">🚻 At First station building</span>
+          <div>
+            <button class="tkt-btn" onclick="toggleTicket('grindelwald-first')">
+              🎟️ Buy Tickets <span id="tkt-arrow-grindelwald-first">▾</span>
+            </button>
+            <div id="tkt-grindelwald-first" class="tkt-box hidden">
+              <a href="https://www.jungfrau.ch/en-gb/grindelwaldfirst/firstbahn-ticket/" target="_blank" rel="noopener" class="tkt-link">
+                🔗 Official Booking — jungfrau.ch ↗
+              </a>
+              <p class="tkt-onsite">Opens Jungfrau Railways booking page in a new tab · Tickets can sell out — book in advance · Free cancellation until 23:59 the day before</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1215,6 +1271,17 @@
             <a href="https://www.youtube.com/results?search_query=st+beatus+caves+switzerland+inside" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
           </div>
           <span class="chip bg-green-50 text-green-700 mt-2">🚻 At cave entrance building</span>
+          <div>
+            <button class="tkt-btn" onclick="toggleTicket('beatus-caves')">
+              🎟️ Buy Tickets <span id="tkt-arrow-beatus-caves">▾</span>
+            </button>
+            <div id="tkt-beatus-caves" class="tkt-box hidden">
+              <a href="https://shop.e-guma.ch/beatushoehlen/en/tickets/admission-st-beatus-caves-incl-cave-museum-3126879" target="_blank" rel="noopener" class="tkt-link">
+                🔗 Official Booking — beatushoehlen.swiss ↗
+              </a>
+              <p class="tkt-onsite">Opens official ticket shop in a new tab · Online booking available · Also sold at entrance</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1247,6 +1314,20 @@
                   <a href="https://www.youtube.com/results?search_query=niederhorn+cable+car+switzerland+lake+thun" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
                 </div>
                 <div class="text-teal-600 mt-1">🎟️ Adult ~CHF 38 return · Child ~CHF 19 · 6A+2C ≈ ~CHF 266</div>
+                <div class="bg-red-50 border border-red-200 rounded-lg px-2.5 py-2 mt-2 text-[11px] text-red-700">
+                  ⚠️ <strong>Check before going!</strong> Niederhorn gondola is under maintenance until ~30 April 2026 — the day after you arrive. Confirm it's open at <a href="https://www.niederhorn.ch/en/timetable-prices" target="_blank" rel="noopener" class="underline">niederhorn.ch</a> before planning this.
+                </div>
+                <div>
+                  <button class="tkt-btn" onclick="toggleTicket('niederhorn')">
+                    🎟️ Buy Tickets <span id="tkt-arrow-niederhorn">▾</span>
+                  </button>
+                  <div id="tkt-niederhorn" class="tkt-box hidden">
+                    <a href="https://niederhorn.axess.shop/en/Products/Tickets/" target="_blank" rel="noopener" class="tkt-link">
+                      🔗 Official Booking — niederhorn.ch ↗
+                    </a>
+                    <p class="tkt-onsite">Opens Niederhorn ticket shop in a new tab · Verify gondola is operational first!</p>
+                  </div>
+                </div>
               </div>
               <div class="border-t border-teal-100 pt-2">
                 <strong>🌉 Sigriswil Panorama Bridge (~10 min drive)</strong><br>
@@ -1774,6 +1855,15 @@
       `;
       container.appendChild(f);
     }
+  }
+
+  // ─── Toggle Ticket Link ───
+  function toggleTicket(id) {
+    const box   = document.getElementById('tkt-' + id);
+    const arrow = document.getElementById('tkt-arrow-' + id);
+    const open  = !box.classList.contains('hidden');
+    box.classList.toggle('hidden', open);
+    if (arrow) arrow.textContent = open ? '▾' : '▴';
   }
 
   // ─── Toggle Home Base ───
