@@ -155,58 +155,31 @@
       font-size: 11px; color: #92400e; text-align: center; padding: 6px 0 2px;
     }
 
-    /* ── Bollywood Vibes ── */
-    @keyframes fabGlow {
-      0%,100% { box-shadow: 0 4px 18px rgba(251,146,60,0.5); }
-      50%      { box-shadow: 0 4px 32px rgba(251,146,60,0.95), 0 0 0 8px rgba(251,146,60,0.1); }
+    /* ── Background Music Player ── */
+    @keyframes musicPulse { 0%,100%{opacity:1;} 50%{opacity:0.45;} }
+    .music-bar {
+      position: fixed; bottom: 72px; left: 50%; transform: translateX(-50%);
+      z-index: 140; display: flex; align-items: center; gap: 10px;
+      background: rgba(8, 18, 36, 0.9);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 30px; padding: 7px 8px 7px 14px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      max-width: 290px; width: calc(100% - 80px);
     }
-    .bwood-fab {
-      position: fixed; bottom: 76px; right: 16px; z-index: 150;
-      width: 52px; height: 52px; border-radius: 50%;
-      background: linear-gradient(135deg, #fb923c 0%, #dc2626 100%);
-      border: 2px solid rgba(255,255,255,0.3);
-      cursor: pointer; font-size: 22px; outline: none;
+    .music-icon { font-size: 15px; flex-shrink: 0; }
+    .music-icon.playing { animation: musicPulse 1s ease-in-out infinite; }
+    .music-info { flex: 1; min-width: 0; }
+    .music-title { color: white; font-size: 11px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .music-sub   { color: rgba(255,255,255,0.4); font-size: 10px; }
+    .music-play-btn {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      border: none; cursor: pointer; outline: none;
       display: flex; align-items: center; justify-content: center;
-      animation: fabGlow 2.5s ease-in-out infinite;
-      transition: transform 0.15s;
+      font-size: 12px; color: white; transition: transform 0.15s;
     }
-    .bwood-fab:active { transform: scale(0.88); }
-
-    .bwood-panel {
-      position: fixed; inset: 0; z-index: 200;
-      overflow-y: auto; -webkit-overflow-scrolling: touch;
-      background: linear-gradient(180deg, #0d0400 0%, #280a00 35%, #4c1500 70%, #722200 100%);
-      transform: translateY(110%);
-      transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
-    }
-    .bwood-panel.bwood-open { transform: translateY(0); }
-
-    .bwood-song {
-      display: flex; align-items: center; gap: 12px;
-      padding: 12px 14px; border-radius: 16px; margin-bottom: 8px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(251,191,36,0.1);
-      text-decoration: none;
-      transition: background 0.15s, border-color 0.15s;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .bwood-song:active { background: rgba(251,191,36,0.1); border-color: rgba(251,191,36,0.4); }
-
-    .bwood-cat {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(251,191,36,0.45);
-      padding: 14px 4px 6px;
-    }
-
-    /* film-strip top bar */
-    .bwood-strip {
-      height: 18px; background: #050100;
-      display: flex; align-items: center; gap: 6px; padding: 0 8px; overflow: hidden;
-    }
-    .bwood-strip-cell {
-      width: 20px; height: 12px; border-radius: 2px;
-      background: rgba(251,191,36,0.18); flex-shrink: 0;
-    }
+    .music-play-btn:active { transform: scale(0.88); }
   </style>
 </head>
 <body>
@@ -1754,10 +1727,6 @@
 </div><!-- /main content -->
 
 
-<!-- ── Bollywood FAB ── -->
-<button class="bwood-fab" id="bwood-fab" onclick="toggleBollywood()" aria-label="Bollywood Vibes">🎵</button>
-
-
 <!-- ══════════════════════════════════════════
      BOTTOM NAV BAR
 ══════════════════════════════════════════ -->
@@ -1931,13 +1900,40 @@
     arrow.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
   }
 
-  // ─── Bollywood Panel ───
-  function toggleBollywood() {
-    const panel = document.getElementById('bwood-panel');
-    const fab   = document.getElementById('bwood-fab');
-    const open  = panel.classList.toggle('bwood-open');
-    document.body.style.overflow = open ? 'hidden' : '';
-    if (fab) fab.textContent = open ? '✕' : '🎵';
+  // ─── Background Music (SoundCloud Widget API) ───
+  let scWidget  = null;
+  let scReady   = false;
+  let musicPlaying = false;
+
+  function initSCWidget() {
+    const iframe = document.getElementById('sc-player');
+    if (!iframe || typeof SC === 'undefined') return;
+    scWidget = SC.Widget(iframe);
+    scWidget.bind(SC.Widget.Events.READY, function() {
+      scReady = true;
+      scWidget.setVolume(65);
+    });
+    scWidget.bind(SC.Widget.Events.FINISH, function() {
+      scWidget.seekTo(0);
+      scWidget.play();
+    });
+  }
+
+  function toggleMusic() {
+    const btn  = document.getElementById('music-btn');
+    const icon = document.getElementById('music-icon');
+    if (!scReady) return;
+    if (!musicPlaying) {
+      scWidget.play();
+      musicPlaying = true;
+      btn.textContent = '⏸';
+      icon.classList.add('playing');
+    } else {
+      scWidget.pause();
+      musicPlaying = false;
+      btn.textContent = '▶';
+      icon.classList.remove('playing');
+    }
   }
 
   // ─── Init ───
@@ -1945,13 +1941,31 @@
     createStars();
     createSnow();
     showDay(0);
+    // Load SoundCloud Widget API asynchronously
+    const s = document.createElement('script');
+    s.src = 'https://w.soundcloud.com/player/api.js';
+    s.onload = initSCWidget;
+    document.head.appendChild(s);
   });
 </script>
 
-<!-- ══════════════════════════════════════════
-     BOLLYWOOD PANEL
-══════════════════════════════════════════ -->
-<div id="bwood-panel" class="bwood-panel">
+<!-- ── Hidden SoundCloud Player ── -->
+<iframe id="sc-player"
+  src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/mitesh-ganmukhi/tujhe-dekha-toh-piano-and-guitar-instrumental&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false"
+  style="position:absolute;width:1px;height:1px;top:-9999px;left:-9999px;opacity:0;pointer-events:none;"
+  allow="autoplay"></iframe>
+
+<!-- ── Floating Music Bar ── -->
+<div class="music-bar" id="music-bar">
+  <span class="music-icon" id="music-icon">🎵</span>
+  <div class="music-info">
+    <div class="music-title">Tujhe Dekha To</div>
+    <div class="music-sub">Piano &amp; Guitar · DDLJ</div>
+  </div>
+  <button class="music-play-btn" id="music-btn" onclick="toggleMusic()" aria-label="Play">▶</button>
+</div>
+
+<div id="bwood-panel" style="display:none">
 
   <!-- Film strip top edge -->
   <div class="bwood-strip">
