@@ -231,6 +231,111 @@
 
 
 <!-- ══════════════════════════════════════════
+     HOME BASE CARD (collapsible)
+══════════════════════════════════════════ -->
+<div class="bg-white border-b border-slate-100">
+  <button onclick="toggleHomeBase()" class="w-full px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,#0f2744,#1a3a5c);">
+        <span class="text-base">🏡</span>
+      </div>
+      <div class="text-left">
+        <div class="text-xs font-semibold text-slate-800">Chalet Christina · Merligen</div>
+        <div class="text-[10px] text-slate-400">Bühlstrasse 6, 3658 Merligen · Check-in from 16:00</div>
+      </div>
+    </div>
+    <span id="hb-arrow" class="text-slate-300 text-xs transition-transform">▼</span>
+  </button>
+
+  <div id="hb-detail" class="hidden px-4 pb-4">
+    <!-- Header strip -->
+    <div class="rounded-2xl overflow-hidden mb-3" style="background:linear-gradient(135deg,#0f2744,#1a3a5c,#2a5580);">
+      <div class="p-4 text-white">
+        <div class="text-[10px] uppercase tracking-widest text-blue-200 mb-1">Your Home Base</div>
+        <h3 class="playfair text-lg font-bold mb-0.5">SwissHut — Chalet Christina</h3>
+        <p class="text-blue-200 text-xs">Bühlstrasse 6, 3658 Merligen, Switzerland</p>
+        <div class="flex flex-wrap gap-2 mt-3">
+          <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">🛏 4 Bedrooms</span>
+          <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">🚿 2 Bathrooms</span>
+          <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">📐 250 m²</span>
+          <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">👨‍👩‍👧‍👦 8 Guests</span>
+        </div>
+      </div>
+      <a href="https://www.booking.com/hotel/ch/swisshut-stunning-views-alps-lake-chalet-christina.en-us.html" target="_blank"
+         class="flex items-center justify-between px-4 py-2.5 bg-black/15 border-t border-white/10 text-xs text-blue-100 no-underline">
+        <span>📖 View on Booking.com</span><span>↗</span>
+      </a>
+    </div>
+
+    <!-- Quick facts grid -->
+    <div class="grid grid-cols-2 gap-2 mb-3">
+      <div class="hbox bg-green-50 text-[11px] text-green-700">
+        <div class="font-semibold">✅ Check-in</div>
+        <div class="mt-0.5">From <strong>16:00</strong> to 20:00<br>Call ahead if arriving later</div>
+      </div>
+      <div class="hbox bg-red-50 text-[11px] text-red-700">
+        <div class="font-semibold">🚪 Check-out</div>
+        <div class="mt-0.5">By <strong>10:00 AM</strong><br>Pack bags night before!</div>
+      </div>
+      <div class="hbox bg-blue-50 text-[11px] text-blue-700">
+        <div class="font-semibold">🅿️ Parking</div>
+        <div class="mt-0.5"><strong>Free on-site</strong><br>Private driveway</div>
+      </div>
+      <div class="hbox bg-purple-50 text-[11px] text-purple-700">
+        <div class="font-semibold">📶 WiFi</div>
+        <div class="mt-0.5"><strong>Free throughout</strong><br>Whole property</div>
+      </div>
+    </div>
+
+    <!-- Kitchen & Amenities -->
+    <div class="card" style="margin-bottom:8px;">
+      <div class="text-xs font-semibold text-slate-700 mb-2">🍳 Kitchen &amp; Amenities</div>
+      <div class="flex flex-wrap gap-1.5 text-[11px]">
+        <span class="chip bg-slate-100 text-slate-600">🍳 Oven + Stovetop</span>
+        <span class="chip bg-slate-100 text-slate-600">🫙 Dishwasher</span>
+        <span class="chip bg-slate-100 text-slate-600">❄️ Refrigerator</span>
+        <span class="chip bg-slate-100 text-slate-600">☕ Kettle + Coffee</span>
+        <span class="chip bg-slate-100 text-slate-600">🧺 Washing Machine</span>
+        <span class="chip bg-slate-100 text-slate-600">🏡 Garden + Balcony</span>
+        <span class="chip bg-slate-100 text-slate-600">📺 TV + Living Room</span>
+        <span class="chip bg-slate-100 text-slate-600">🛏 Baby Cot Available</span>
+        <span class="chip bg-slate-100 text-slate-600">🚭 Non-smoking</span>
+      </div>
+    </div>
+
+    <!-- Nearby gems -->
+    <div class="card" style="margin-bottom:8px;">
+      <div class="text-xs font-semibold text-slate-700 mb-2">📍 Right on Your Doorstep</div>
+      <div class="space-y-2">
+        <div class="flex items-start gap-2 text-[11px]">
+          <span>☕</span>
+          <div><strong class="text-slate-700">Café Kafi Mele</strong> <span class="text-slate-400">— adjacent to the chalet</span><br><span class="text-slate-500">Morning coffee spot right next door</span></div>
+        </div>
+        <div class="flex items-start gap-2 text-[11px]">
+          <span>🚡</span>
+          <div><strong class="text-slate-700">Niederhorn Cable Car</strong> <span class="text-slate-400">— 2.2 km away</span><br><span class="text-slate-500">Panoramic alpine viewpoint, easy half-day option</span></div>
+        </div>
+        <div class="flex items-start gap-2 text-[11px]">
+          <span>🌉</span>
+          <div><strong class="text-slate-700">Sigriswil Panorama Bridge</strong> <span class="text-slate-400">— ~10 min drive</span><br><span class="text-slate-500">Suspension bridge over a 180m gorge with lake views</span></div>
+        </div>
+        <div class="flex items-start gap-2 text-[11px]">
+          <span>🏰</span>
+          <div><strong class="text-slate-700">Oberhofen Castle</strong> <span class="text-slate-400">— ~7 km</span><br><span class="text-slate-500">Fairy-tale castle right on Lake Thun</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Maps + rating -->
+    <div class="flex gap-2">
+      <a href="https://maps.google.com/?q=Bühlstrasse+6+Merligen+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-700 flex-1 justify-center py-2">📍 Open in Maps</a>
+      <div class="chip bg-green-100 text-green-700 flex-1 justify-center py-2">⭐ 9.3 / 10 Superb</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
      DAY NAVIGATION (STICKY)
 ══════════════════════════════════════════ -->
 <div class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-100 shadow-sm">
@@ -354,19 +459,48 @@
       </div>
 
       <div class="tl-item">
+        <div class="tl-dot bg-amber-100 text-amber-600">⏳</div>
+        <div>
+          <span class="text-[10px] font-bold text-amber-600 uppercase">~14:50 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Arrive Merligen — Check-in at 16:00</h4>
+          <p class="text-xs text-slate-500 mt-1">You'll arrive ~1 hour before check-in opens. Two great options to fill the gap:</p>
+          <div class="space-y-2 mt-2">
+            <div class="hbox bg-amber-50 text-[11px] text-amber-700">
+              <strong>Option A (0 min away) ☕</strong> — <strong>Café Kafi Mele</strong> is literally next door to the chalet. Tea, coffee, snacks while the kids stretch their legs.
+              <br><a href="https://maps.google.com/?q=Café+Kafi+Mele+Merligen+Switzerland" target="_blank" class="chip bg-amber-100 text-amber-700 mt-2">📍 Maps</a>
+            </div>
+            <div class="hbox bg-purple-50 text-[11px] text-purple-700">
+              <strong>Option B (10 min drive) 🌉</strong> — <strong>Sigriswil Panorama Bridge</strong> — a 340m suspension bridge over a 180m gorge with alpine + lake views. Free. Fully accessible for elderly.
+              <div class="flex gap-1.5 mt-2 flex-wrap">
+                <a href="https://maps.google.com/?q=Sigriswil+Panorama+Bridge+Switzerland" target="_blank" class="chip bg-purple-100 text-purple-700">📍 Maps</a>
+                <a href="https://www.youtube.com/results?search_query=sigriswil+panorama+bridge+switzerland" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+                <a href="https://www.instagram.com/explore/tags/sigriswilbridge/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 Instagram</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
         <div class="tl-dot bg-green-100 text-green-600">🏡</div>
         <div>
-          <span class="text-[10px] font-bold text-green-500 uppercase">15:30 PM</span>
-          <h4 class="font-semibold text-sm mt-0.5">Check-in at Merligen</h4>
-          <p class="text-xs text-slate-500 mt-1">Your home base for 4 nights. Settle in, unpack, let elderly and kids rest. This is a hidden gem — quiet lakeside village, no tourists!</p>
-          <a href="https://maps.google.com/?q=Merligen+Switzerland+Lake+Thun" target="_blank" class="chip bg-slate-100 text-slate-600 mt-2">📍 Merligen on Maps</a>
+          <span class="text-[10px] font-bold text-green-500 uppercase">16:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Check-in — Chalet Christina</h4>
+          <p class="text-xs text-slate-500 mt-1">Your 250m² home for 4 nights. 4 bedrooms · 2 bathrooms · fully equipped kitchen · free parking · garden with lake + Alps views. Settle in, unpack, breathe.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Bühlstrasse+6+Merligen+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Chalet on Maps</a>
+            <a href="https://www.booking.com/hotel/ch/swisshut-stunning-views-alps-lake-chalet-christina.en-us.html" target="_blank" class="chip bg-blue-50 text-blue-600">📖 Booking.com</a>
+          </div>
+          <div class="hbox bg-green-50 mt-2 text-[11px] text-green-700">
+            🅿️ <strong>Free on-site parking</strong> — no need to worry about parking fees at the base tonight!
+          </div>
         </div>
       </div>
 
       <div class="tl-item">
         <div class="tl-dot bg-orange-100 text-orange-500">🛒</div>
         <div>
-          <span class="text-[10px] font-bold text-orange-500 uppercase">16:30 PM</span>
+          <span class="text-[10px] font-bold text-orange-500 uppercase">17:30 PM</span>
           <h4 class="font-semibold text-sm mt-0.5">Big Grocery Run — Do This Today!</h4>
           <p class="text-xs text-slate-500 mt-1">One big shop saves time every other day. Drive 20 min to Interlaken — both Coop and Migros are excellent.</p>
           <div class="flex flex-wrap gap-1.5 mt-2">
@@ -1099,7 +1233,31 @@
         <div>
           <span class="text-[10px] font-bold text-sky-500 uppercase">15:00 PM</span>
           <h4 class="font-semibold text-sm mt-0.5">Lake Thun Afternoon — Pure Bliss</h4>
-          <p class="text-xs text-slate-500 mt-1">Back to base. Lakeside afternoon. Kids skip stones. Elderly sip tea on the terrace. Adults nap. This unhurried time IS the Switzerland experience.</p>
+          <p class="text-xs text-slate-500 mt-1">Back to base. Lakeside afternoon. Kids skip stones. Elderly sip tea on the chalet terrace. Adults nap. This unhurried time IS the Switzerland experience.</p>
+
+          <!-- Bonus nearby options -->
+          <div class="mt-2 hbox bg-teal-50 text-[11px] text-teal-700">
+            <strong>💡 Bonus if energy allows — both within 10 min:</strong>
+            <div class="space-y-2 mt-2">
+              <div>
+                <strong>🚡 Niederhorn Cable Car (2.2 km away!)</strong><br>
+                <span class="text-teal-600">Alpine panorama viewpoint straight from your doorstep. Elevator-style cable car — elderly-friendly. Snow views + wildflowers in May. Optional easy walk at top.</span>
+                <div class="flex gap-1.5 mt-1.5 flex-wrap">
+                  <a href="https://maps.google.com/?q=Niederhorn+Cable+Car+Beatenberg+Switzerland" target="_blank" class="chip bg-teal-100 text-teal-700">📍 Maps</a>
+                  <a href="https://www.youtube.com/results?search_query=niederhorn+cable+car+switzerland+lake+thun" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+                </div>
+                <div class="text-teal-600 mt-1">🎟️ Adult ~CHF 38 return · Child ~CHF 19 · 6A+2C ≈ ~CHF 266</div>
+              </div>
+              <div class="border-t border-teal-100 pt-2">
+                <strong>🌉 Sigriswil Panorama Bridge (~10 min drive)</strong><br>
+                <span class="text-teal-600">340m suspension bridge over a 180m gorge — completely free! Easy for all ages. Stunning lake + mountain views.</span>
+                <div class="flex gap-1.5 mt-1.5 flex-wrap">
+                  <a href="https://maps.google.com/?q=Sigriswil+Panorama+Bridge+Switzerland" target="_blank" class="chip bg-teal-100 text-teal-700">📍 Maps</a>
+                  <a href="https://www.instagram.com/explore/tags/sigriswilbridge/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 Instagram</a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1108,7 +1266,7 @@
         <div>
           <span class="text-[10px] font-bold text-purple-500 uppercase">19:30 PM</span>
           <h4 class="font-semibold text-sm mt-0.5">Sunset + Last Home Dinner</h4>
-          <p class="text-xs text-slate-500 mt-1">Final proper home dinner together. Pack bags tonight — Lucerne + departure tomorrow.</p>
+          <p class="text-xs text-slate-500 mt-1">Final proper home dinner together. <strong>Pack bags tonight</strong> — Lucerne + departure tomorrow. Checkout is 10:00 AM.</p>
         </div>
       </div>
     </div><!-- /card -->
@@ -1118,9 +1276,10 @@
       <div class="space-y-2 text-xs">
         <div class="flex justify-between"><span class="text-slate-500">🅿️ Iseltwald (free/small)</span><span class="font-semibold">~0–5 CHF</span></div>
         <div class="flex justify-between"><span class="text-slate-500">🦇 St. Beatus Caves (6A+2C)</span><span class="font-semibold">~140 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🌉 Sigriswil Bridge (free!) or 🚡 Niederhorn</span><span class="font-semibold">0 or ~266 CHF</span></div>
         <div class="flex justify-between"><span class="text-slate-500">🍽️ Lunch (eat out or home)</span><span class="font-semibold">60–150 CHF</span></div>
         <div class="flex justify-between"><span class="text-slate-500">☕ Snacks + Coffee</span><span class="font-semibold">~30–40 CHF</span></div>
-        <div class="flex justify-between text-sm font-bold pt-2 border-t border-slate-100"><span>Total</span><span class="text-teal-600">~230–335 CHF</span></div>
+        <div class="flex justify-between text-sm font-bold pt-2 border-t border-slate-100"><span>Total</span><span class="text-teal-600">~230–601 CHF</span></div>
       </div>
     </div>
   </div><!-- /option B -->
@@ -1615,6 +1774,15 @@
       `;
       container.appendChild(f);
     }
+  }
+
+  // ─── Toggle Home Base ───
+  function toggleHomeBase() {
+    const detail = document.getElementById('hb-detail');
+    const arrow  = document.getElementById('hb-arrow');
+    const open   = !detail.classList.contains('hidden');
+    detail.classList.toggle('hidden', open);
+    arrow.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
   }
 
   // ─── Init ───
