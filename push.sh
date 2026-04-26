@@ -23,6 +23,8 @@ git push origin main
 echo "→ Pushing to GitHub..."
 git push github main
 
-echo "✅ Done — live on both platforms."
-echo "   GitHub Pages : https://ignitedmind28.github.io/itinera/"
-echo "   GitLab Pages : https://ignitedmind28.gitlab.io/iteneria/"
+echo "✅ Done."
+echo ""
+echo "   🔗 SHARE THIS LINK → https://ignitedmind28.github.io/itinera/"
+echo ""
+echo "   (GitLab: make project Public in Settings → General to enable that URL)"

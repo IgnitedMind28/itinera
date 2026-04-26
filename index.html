@@ -369,10 +369,10 @@
       <div>Apr 29</div><div class="opacity-70 text-[10px]">✈️ Arrival</div>
     </button>
     <button onclick="showDay(1)" id="tab-1" class="day-tab flex-shrink-0 rounded-xl px-3 py-2 text-xs font-semibold text-slate-500 bg-slate-100" style="min-width:68px;">
-      <div>Apr 30</div><div class="opacity-70 text-[10px]">🏔️ Interlaken</div>
+      <div>Apr 30</div><div class="opacity-70 text-[10px]">💧 Lauterb.</div>
     </button>
     <button onclick="showDay(2)" id="tab-2" class="day-tab flex-shrink-0 rounded-xl px-3 py-2 text-xs font-semibold text-slate-500 bg-slate-100" style="min-width:68px;">
-      <div>May 1</div><div class="opacity-70 text-[10px]">💧 Lauterb.</div>
+      <div>May 1</div><div class="opacity-70 text-[10px]">🏔️ Interlaken</div>
     </button>
     <button onclick="showDay(3)" id="tab-3" class="day-tab flex-shrink-0 rounded-xl px-3 py-2 text-xs font-semibold text-slate-500 bg-slate-100" style="min-width:68px;">
       <div>May 2</div><div class="opacity-70 text-[10px]">🌿 Flex Day</div>
@@ -602,13 +602,238 @@
 
 
 <!-- ═══════════════════════════════
-     DAY 1 — INTERLAKEN
+     DAY 1 — LAUTERBRUNNEN
 ═══════════════════════════════ -->
 <div id="day-1" class="day-section hidden">
 
+  <div class="rounded-2xl overflow-hidden mb-4 text-white" style="background:linear-gradient(135deg,#064e3b,#059669,#34d399);">
+    <div class="p-5">
+      <div class="text-[10px] uppercase tracking-widest text-emerald-200 mb-1">Day 1 · April 30, 2026</div>
+      <h2 class="playfair text-2xl font-bold mb-1">Lauterbrunnen 💧</h2>
+      <p class="text-emerald-200 text-sm">Merligen → Lauterbrunnen Valley → Trümmelbach Falls</p>
+      <div class="flex flex-wrap gap-2 mt-3">
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">72 waterfalls 🌊</span>
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">Fairytale valley ✨</span>
+        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">~30 km from base</span>
+      </div>
+    </div>
+    <div class="flex border-t border-white/10 bg-black/15">
+      <a href="https://www.google.com/maps/dir/Merligen+Switzerland/Lauterbrunnen+Switzerland" target="_blank"
+         class="flex-1 flex items-center justify-center gap-1 px-3 py-2.5 text-xs text-emerald-100 no-underline border-r border-white/10">
+        <span>🗺️</span><span>Drive Route</span><span>↗</span>
+      </a>
+      <a href="https://www.google.com/maps?geocode=FWhkxgId_ZB4ACk5hTFrC6CPRzE3GckN6zinlA%3D%3D;FaDmxgIdFKB4ACkfNGSxCPp4BDGGhyvbFhQkEQ%3D%3D;FVSXxgIdBMR4ACk9eaKUF6CPRzEAAAAAAAAAAA%3D%3D;FfxJxgIdPJF4AClLdnXLswqPRzEAAAAAAAAAAA%3D%3D;FWhkxgId_ZB4ACk5hTFrC6CPRzE3GckN6zinlA%3D%3D&daddr=Staubbach+Falls,+Lauterbrunnen+to:Tr%C3%BCmmelbach+Falls,+Lauterbrunnen+to:Stechelberg,+Lauterbrunnen+to:Parking+lot,+Lauterbrunnen,+Switzerland&saddr=Parking+lot,+Lauterbrunnen,+Switzerland&dirflg=w&ftid=0x478fa00b6b318539:0x94a738eb0dc91937;0x478fa00b6b318539:0x94a738eb0dc91937&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869&g_ep=CAISEjI2LjEyLjIuODg0NjExMjE2MBgAILq3Cyo_LDk0Mjk3Njk5LDk0MjMxMTg4LDk0MjgwNTY4LDQ3MDcxNzA0LDk0MjE4NjQxLDk0MjgyMTM0LDk0Mjg2ODY5QgJOTA%3D%3D&skid=97e6192b-de50-4e0f-9379-e600b31518d7&g_st=ic" target="_blank"
+         class="flex-1 flex items-center justify-center gap-1 px-3 py-2.5 text-xs text-emerald-100 no-underline">
+        <span>🥾</span><span>Scenic Hiking Route</span><span>↗</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="mode-bar mb-4">
+    <button class="mode-btn active" onclick="setMode(1,'full')" id="mode-1-full">👨‍👩‍👧‍👦 Full Group</button>
+    <button class="mode-btn" onclick="setMode(1,'active')" id="mode-1-active">🏃 Without 👴👵</button>
+  </div>
+
+  <!-- FULL GROUP -->
+  <div id="content-1-full">
+
+    <div class="banner bg-emerald-50 border border-emerald-100 mb-4">
+      <span class="text-2xl flex-shrink-0">🌊</span>
+      <div class="text-xs text-emerald-700">
+        <strong>This is your WOW day!</strong> Lauterbrunnen has 72 waterfalls. April 30 = snow melt at its peak = maximum waterfall power. You literally couldn't have timed this better!
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-4 text-slate-700">📋 Itinerary</h3>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-yellow-100 text-yellow-600">🥚</div>
+        <div>
+          <span class="text-[10px] font-bold text-yellow-600 uppercase">08:30 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Home Breakfast</h4>
+          <p class="text-xs text-slate-500 mt-1">Fill up well — full day ahead. Pack light snacks and water bottles (Swiss tap water is perfect for refills).</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-slate-100 text-slate-500">🚗</div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-400 uppercase">09:15 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Drive to Lauterbrunnen (~30 min)</h4>
+          <p class="text-xs text-slate-500 mt-1">Via Interlaken. As you turn into the valley, vertical 1000m cliff walls appear on both sides. First-timers always gasp — be ready! 😄</p>
+          <div class="hbox bg-amber-50 mt-2 text-[11px] text-amber-700">
+            ⚠️ <strong>Arrive before 10:30 AM!</strong> Lauterbrunnen parking fills very fast in May. Being early is critical.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-blue-100 text-blue-600">🅿️</div>
+        <div>
+          <span class="text-[10px] font-bold text-blue-500 uppercase">09:50 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Park at Village Entrance</h4>
+          <div class="hbox bg-blue-50 mt-2">
+            <div class="text-[11px] font-semibold text-blue-700">🅿️ Parkplatz Lauterbrunnen (P1 / P2)</div>
+            <div class="text-[11px] text-blue-600 mt-0.5">Large car park at village entrance · ~CHF 15–20/day · Toilets right at entry</div>
+            <a href="https://maps.google.com/?q=Parkplatz+Lauterbrunnen+Switzerland" target="_blank" class="chip bg-blue-100 text-blue-700 mt-2">📍 Maps</a>
+          </div>
+          <span class="chip bg-green-50 text-green-700 mt-2">🚻 Toilets at car park entrance — use before walking</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-emerald-100 text-emerald-600">🌿</div>
+        <div>
+          <span class="text-[10px] font-bold text-emerald-500 uppercase">10:00 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Valley Walk + Village Stroll</h4>
+          <p class="text-xs text-slate-500 mt-1">Flat walking path through the valley. Swiss chalets everywhere, waterfalls dripping from cliff edges. The 6-year-old will think it's a fairy tale.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Lauterbrunnen+Valley+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=lauterbrunnen+valley+switzerland+spring+4k" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+            <a href="https://www.instagram.com/explore/tags/lauterbrunnen/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #lauterbrunnen</a>
+          </div>
+          <div class="hbox bg-emerald-50 mt-2 text-[11px] text-emerald-700">
+            📸 <strong>Iconic Shot:</strong> Stand in the center of the valley road looking toward the cliff walls — vertical rock + cascading waterfalls on both sides. Portrait format, maximum drama.
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-blue-100 text-blue-500">💦</div>
+        <div>
+          <span class="text-[10px] font-bold text-blue-500 uppercase">10:45 AM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Staubbach Falls</h4>
+          <p class="text-xs text-slate-500 mt-1">297m waterfall dropping straight from the clifftop into the village. <strong>Free!</strong> Optional easy 10-min path up to the cave viewpoint behind the falls — unforgettable close-up.</p>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Staubbach+Falls+Lauterbrunnen" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=staubbach+falls+lauterbrunnen" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+            <a href="https://www.instagram.com/explore/tags/staubbachfalls/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #staubbachfalls</a>
+          </div>
+          <div class="hbox bg-blue-50 mt-2 text-[11px] text-blue-700">
+            📸 <strong>Photo:</strong> Shoot from the road with entire waterfall in frame — village at bottom, cliff top at top. Include someone in the foreground for scale. Absolutely stunning.
+          </div>
+          <span class="chip bg-green-50 text-green-700 mt-2">🚻 Public toilet near falls viewpoint</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-cyan-100 text-cyan-600">🌀</div>
+        <div>
+          <span class="text-[10px] font-bold text-cyan-500 uppercase">12:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">⚡ Trümmelbach Falls (Unmissable!)</h4>
+          <p class="text-xs text-slate-500 mt-1">UNESCO-listed! Glacier meltwater crashing through tunnels INSIDE a mountain. Elevator access — perfect for elderly! The power and noise is unreal. Get slightly wet. Kids go wild.</p>
+          <div class="grid grid-cols-2 gap-2 mt-2">
+            <div class="hbox bg-cyan-50 text-[11px] text-cyan-700">
+              <div class="font-semibold">🎟️ Tickets</div>
+              <div class="mt-0.5">Adult: ~CHF 16<br>Child: ~CHF 8<br>6A+2C ≈ <strong>CHF 112</strong></div>
+            </div>
+            <div class="hbox bg-cyan-50 text-[11px] text-cyan-700">
+              <div class="font-semibold">⚠️ Important</div>
+              <div class="mt-0.5">Bring a jacket!<br>Gets very misty<br>~45 min visit</div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Trummelbach+Falls+Lauterbrunnen+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=trummelbach+falls+inside+mountain+switzerland" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+          </div>
+          <span class="chip bg-green-50 text-green-700 mt-2">🚻 At Trümmelbach entrance building</span>
+          <div>
+            <button class="tkt-btn" onclick="toggleTicket('truemmelbach')">
+              🎟️ Ticket Info <span id="tkt-arrow-truemmelbach">▾</span>
+            </button>
+            <div id="tkt-truemmelbach" class="tkt-box hidden">
+              <a href="https://www.truemmelbachfaelle.ch/e/" target="_blank" rel="noopener" class="tkt-link">
+                🔗 Official Website — truemmelbachfaelle.ch ↗
+              </a>
+              <p class="tkt-onsite">⚠️ No online booking — tickets bought at entrance only · Cash or card accepted</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-orange-100 text-orange-500">🍽️</div>
+        <div>
+          <span class="text-[10px] font-bold text-orange-500 uppercase">13:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Lunch in Lauterbrunnen</h4>
+          <p class="text-xs text-slate-500 mt-1">Limited Indian options here — Swiss restaurants are the smart choice. Rösti, pasta, cheese dishes are vegetarian-friendly and delicious.</p>
+          <div class="space-y-2 mt-2">
+            <a href="https://maps.google.com/?q=vegetarian+restaurant+Lauterbrunnen+Switzerland" target="_blank" class="chip bg-orange-100 text-orange-600">🔍 Find Restaurants</a>
+            <div class="hbox bg-orange-50 text-[11px] text-orange-700">
+              <strong>Look for:</strong> Any restaurant with "Rösti" or "Pasta" on the board. Restaurant Schützen and Restaurant Jungfrau are known options in the village.
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1.5">💰 Budget: ~CHF 120–160 for 8 people</p>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-purple-100 text-purple-500">☕</div>
+        <div>
+          <span class="text-[10px] font-bold text-purple-500 uppercase">15:00 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Coffee Break + Slow Valley Time</h4>
+          <p class="text-xs text-slate-500 mt-1">Don't rush out! Let the valley breathe. Kids play by the stream. Elderly sip coffee with a view. This unhurried time is actually the magic of Lauterbrunnen.</p>
+          <a href="https://maps.google.com/?q=cafe+Lauterbrunnen+Switzerland" target="_blank" class="chip bg-purple-100 text-purple-600 mt-2">☕ Find Cafés</a>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot bg-slate-100 text-slate-500">🏡</div>
+        <div>
+          <span class="text-[10px] font-bold text-slate-400 uppercase">16:30 PM</span>
+          <h4 class="font-semibold text-sm mt-0.5">Return to Merligen</h4>
+          <p class="text-xs text-slate-500 mt-1">30-min drive back. Tired, wet from falls, full of memories. Home dinner + rest. Tomorrow is the Interlaken day — parks, panoramas, and a hidden old town!</p>
+        </div>
+      </div>
+    </div><!-- /card -->
+
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-3">💰 Day 1 Budget</h3>
+      <div class="space-y-2 text-xs">
+        <div class="flex justify-between"><span class="text-slate-500">🅿️ Parkplatz Lauterbrunnen</span><span class="font-semibold">~15–20 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🌀 Trümmelbach Falls (6A+2C)</span><span class="font-semibold">~112 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">🍽️ Lunch (8 people)</span><span class="font-semibold">120–160 CHF</span></div>
+        <div class="flex justify-between"><span class="text-slate-500">☕ Coffee + Snacks</span><span class="font-semibold">40–60 CHF</span></div>
+        <div class="flex justify-between text-sm font-bold pt-2 border-t border-slate-100"><span>Total</span><span class="text-emerald-600">~287–352 CHF</span></div>
+      </div>
+    </div>
+  </div><!-- /content-1-full -->
+
+  <!-- ACTIVE MODE (Day 1) -->
+  <div id="content-1-active" class="hidden">
+    <div class="card">
+      <h3 class="font-semibold text-sm mb-3">🏃 Without 👴👵 Extras — Day 1</h3>
+      <div class="space-y-3">
+        <div style="background:linear-gradient(135deg,#f5f3ff,#ede9fe);" class="rounded-xl p-3 border border-purple-100">
+          <div class="font-semibold text-sm text-purple-700">🚂 Train to Wengen (Car-Free Village!)</div>
+          <p class="text-xs text-purple-600 mt-1">No cars allowed in Wengen! Take the rack railway from Lauterbrunnen station. Village sits high on the cliff with jaw-dropping valley views looking DOWN at Lauterbrunnen.</p>
+          <div class="text-xs font-semibold text-purple-800 mt-1">~CHF 22 return/adult · 15 min ride · Perfect for teens</div>
+          <div class="flex gap-1.5 mt-2">
+            <a href="https://maps.google.com/?q=Wengen+Switzerland" target="_blank" class="chip bg-purple-100 text-purple-700">📍 Maps</a>
+            <a href="https://www.youtube.com/results?search_query=wengen+switzerland+train+views" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
+          </div>
+        </div>
+        <div style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);" class="rounded-xl p-3 border border-green-100">
+          <div class="font-semibold text-sm text-green-700">🥾 Valley Floor Trail (Easy Walk)</div>
+          <p class="text-xs text-green-600 mt-1">1-hour flat walk through valley following the glacial stream. Crystal-clear water. Kids love wading at safe points. Total fairy-tale scenery.</p>
+          <div class="text-xs font-semibold text-green-800 mt-1">Free · Flat terrain · Great for the 13yr-old</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /day-1 -->
+
+
+<!-- ═══════════════════════════════
+     DAY 2 — INTERLAKEN
+═══════════════════════════════ -->
+<div id="day-2" class="day-section hidden">
+
   <div class="rounded-2xl overflow-hidden mb-4 text-white" style="background:linear-gradient(135deg,#075985,#0284c7,#38bdf8);">
     <div class="p-5">
-      <div class="text-[10px] uppercase tracking-widest text-sky-200 mb-1">Day 1 · April 30, 2026</div>
+      <div class="text-[10px] uppercase tracking-widest text-sky-200 mb-1">Day 2 · May 1, 2026</div>
       <h2 class="playfair text-2xl font-bold mb-1">Interlaken Day 🏔️</h2>
       <p class="text-sky-200 text-sm">Merligen → Interlaken → Harder Kulm → Unterseen</p>
       <div class="flex flex-wrap gap-2 mt-3">
@@ -619,17 +844,17 @@
     </div>
     <a href="https://www.google.com/maps/dir/Merligen+Switzerland/Interlaken+Switzerland" target="_blank"
        class="flex items-center justify-between px-5 py-3 bg-black/15 border-t border-white/10 text-sm text-sky-100 no-underline">
-      <span>📍 Open Day 1 Route in Maps</span><span>↗</span>
+      <span>📍 Open Day 2 Route in Maps</span><span>↗</span>
     </a>
   </div>
 
   <div class="mode-bar mb-4">
-    <button class="mode-btn active" onclick="setMode(1,'full')" id="mode-1-full">👨‍👩‍👧‍👦 Full Group</button>
-    <button class="mode-btn" onclick="setMode(1,'active')" id="mode-1-active">🏃 Without 👴👵</button>
+    <button class="mode-btn active" onclick="setMode(2,'full')" id="mode-2-full">👨‍👩‍👧‍👦 Full Group</button>
+    <button class="mode-btn" onclick="setMode(2,'active')" id="mode-2-active">🏃 Without 👴👵</button>
   </div>
 
   <!-- FULL GROUP -->
-  <div id="content-1-full">
+  <div id="content-2-full">
 
     <div class="banner bg-sky-50 border border-sky-100 mb-4">
       <span class="text-xl flex-shrink-0">⭐</span>
@@ -786,13 +1011,13 @@
         <div>
           <span class="text-[10px] font-bold text-slate-400 uppercase">16:30 PM</span>
           <h4 class="font-semibold text-sm mt-0.5">Return to Merligen</h4>
-          <p class="text-xs text-slate-500 mt-1">20-min drive back. Evening relax + home-cooked dinner. Tomorrow is the highlight day — the WOW valley!</p>
+          <p class="text-xs text-slate-500 mt-1">20-min drive back. Evening relax + home-cooked dinner. Tomorrow is the flexible day — Grindelwald or a chill day at the lake!</p>
         </div>
       </div>
     </div><!-- /card -->
 
     <div class="card">
-      <h3 class="font-semibold text-sm mb-3">💰 Day 1 Budget</h3>
+      <h3 class="font-semibold text-sm mb-3">💰 Day 2 Budget</h3>
       <div class="space-y-2 text-xs">
         <div class="flex justify-between"><span class="text-slate-500">🅿️ Parkhaus Zentrum</span><span class="font-semibold">~20–25 CHF</span></div>
         <div class="flex justify-between"><span class="text-slate-500">🚡 Harder Kulm (6A + 2C)</span><span class="font-semibold">~266 CHF</span></div>
@@ -801,16 +1026,16 @@
         <div class="flex justify-between text-sm font-bold pt-2 border-t border-slate-100"><span>Total</span><span class="text-sky-600">~446–511 CHF</span></div>
       </div>
     </div>
-  </div><!-- /content-1-full -->
+  </div><!-- /content-2-full -->
 
-  <!-- ACTIVE MODE (Day 1) -->
-  <div id="content-1-active" class="hidden">
+  <!-- ACTIVE MODE (Day 2) -->
+  <div id="content-2-active" class="hidden">
     <div class="banner bg-amber-50 border border-amber-100 mb-4">
       <span class="text-xl flex-shrink-0">🏃</span>
       <div class="text-xs text-amber-800"><strong>Without 👴👵:</strong> Elderly staying back today? Here's what to add for the energetic crew + teens.</div>
     </div>
     <div class="card">
-      <h3 class="font-semibold text-sm mb-3">🔥 Active Add-ons for Day 1</h3>
+      <h3 class="font-semibold text-sm mb-3">🔥 Active Add-ons for Day 2</h3>
       <div class="space-y-3">
         <div style="background:linear-gradient(135deg,#fff7ed,#fef3c7);" class="rounded-xl p-3 border border-orange-100">
           <div class="font-semibold text-sm text-orange-700">🪂 Tandem Paragliding</div>
@@ -826,231 +1051,6 @@
           <p class="text-xs text-blue-600 mt-1">Turquoise lake + glacial reflections + mountain walls. Dreamy alternative or addition to Harder Kulm afternoon.</p>
           <div class="text-xs font-semibold text-blue-800 mt-1">Price: ~CHF 20/adult · Hourly departures from Interlaken Ost</div>
           <a href="https://maps.google.com/?q=Lake+Brienz+boat+cruise+Interlaken" target="_blank" class="chip bg-blue-100 text-blue-700 mt-2">📍 Maps</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div><!-- /day-1 -->
-
-
-<!-- ═══════════════════════════════
-     DAY 2 — LAUTERBRUNNEN
-═══════════════════════════════ -->
-<div id="day-2" class="day-section hidden">
-
-  <div class="rounded-2xl overflow-hidden mb-4 text-white" style="background:linear-gradient(135deg,#064e3b,#059669,#34d399);">
-    <div class="p-5">
-      <div class="text-[10px] uppercase tracking-widest text-emerald-200 mb-1">Day 2 · May 1, 2026</div>
-      <h2 class="playfair text-2xl font-bold mb-1">Lauterbrunnen 💧</h2>
-      <p class="text-emerald-200 text-sm">Merligen → Lauterbrunnen Valley → Trümmelbach Falls</p>
-      <div class="flex flex-wrap gap-2 mt-3">
-        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">72 waterfalls 🌊</span>
-        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">Fairytale valley ✨</span>
-        <span class="bg-white/15 text-[11px] px-2.5 py-1 rounded-full">~30 km from base</span>
-      </div>
-    </div>
-    <div class="flex border-t border-white/10 bg-black/15">
-      <a href="https://www.google.com/maps/dir/Merligen+Switzerland/Lauterbrunnen+Switzerland" target="_blank"
-         class="flex-1 flex items-center justify-center gap-1 px-3 py-2.5 text-xs text-emerald-100 no-underline border-r border-white/10">
-        <span>🗺️</span><span>Drive Route</span><span>↗</span>
-      </a>
-      <a href="https://www.google.com/maps?geocode=FWhkxgId_ZB4ACk5hTFrC6CPRzE3GckN6zinlA%3D%3D;FaDmxgIdFKB4ACkfNGSxCPp4BDGGhyvbFhQkEQ%3D%3D;FVSXxgIdBMR4ACk9eaKUF6CPRzEAAAAAAAAAAA%3D%3D;FfxJxgIdPJF4AClLdnXLswqPRzEAAAAAAAAAAA%3D%3D;FWhkxgId_ZB4ACk5hTFrC6CPRzE3GckN6zinlA%3D%3D&daddr=Staubbach+Falls,+Lauterbrunnen+to:Tr%C3%BCmmelbach+Falls,+Lauterbrunnen+to:Stechelberg,+Lauterbrunnen+to:Parking+lot,+Lauterbrunnen,+Switzerland&saddr=Parking+lot,+Lauterbrunnen,+Switzerland&dirflg=w&ftid=0x478fa00b6b318539:0x94a738eb0dc91937;0x478fa00b6b318539:0x94a738eb0dc91937&lucs=,94297699,94231188,94280568,47071704,94218641,94282134,94286869&g_ep=CAISEjI2LjEyLjIuODg0NjExMjE2MBgAILq3Cyo_LDk0Mjk3Njk5LDk0MjMxMTg4LDk0MjgwNTY4LDQ3MDcxNzA0LDk0MjE4NjQxLDk0MjgyMTM0LDk0Mjg2ODY5QgJOTA%3D%3D&skid=97e6192b-de50-4e0f-9379-e600b31518d7&g_st=ic" target="_blank"
-         class="flex-1 flex items-center justify-center gap-1 px-3 py-2.5 text-xs text-emerald-100 no-underline">
-        <span>🥾</span><span>Scenic Hiking Route</span><span>↗</span>
-      </a>
-    </div>
-  </div>
-
-  <div class="mode-bar mb-4">
-    <button class="mode-btn active" onclick="setMode(2,'full')" id="mode-2-full">👨‍👩‍👧‍👦 Full Group</button>
-    <button class="mode-btn" onclick="setMode(2,'active')" id="mode-2-active">🏃 Without 👴👵</button>
-  </div>
-
-  <!-- FULL GROUP -->
-  <div id="content-2-full">
-
-    <div class="banner bg-emerald-50 border border-emerald-100 mb-4">
-      <span class="text-2xl flex-shrink-0">🌊</span>
-      <div class="text-xs text-emerald-700">
-        <strong>This is your WOW day!</strong> Lauterbrunnen has 72 waterfalls. May 1 = snow melt at its peak = maximum waterfall power. You literally couldn't have timed this better!
-      </div>
-    </div>
-
-    <div class="card">
-      <h3 class="font-semibold text-sm mb-4 text-slate-700">📋 Itinerary</h3>
-
-      <div class="tl-item">
-        <div class="tl-dot bg-yellow-100 text-yellow-600">🥚</div>
-        <div>
-          <span class="text-[10px] font-bold text-yellow-600 uppercase">08:30 AM</span>
-          <h4 class="font-semibold text-sm mt-0.5">Home Breakfast</h4>
-          <p class="text-xs text-slate-500 mt-1">Fill up well — full day ahead. Pack light snacks and water bottles (Swiss tap water is perfect for refills).</p>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot bg-slate-100 text-slate-500">🚗</div>
-        <div>
-          <span class="text-[10px] font-bold text-slate-400 uppercase">09:15 AM</span>
-          <h4 class="font-semibold text-sm mt-0.5">Drive to Lauterbrunnen (~30 min)</h4>
-          <p class="text-xs text-slate-500 mt-1">Via Interlaken. As you turn into the valley, vertical 1000m cliff walls appear on both sides. First-timers always gasp — be ready! 😄</p>
-          <div class="hbox bg-amber-50 mt-2 text-[11px] text-amber-700">
-            ⚠️ <strong>Arrive before 10:30 AM!</strong> Lauterbrunnen parking fills very fast in May. Being early is critical.
-          </div>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot bg-blue-100 text-blue-600">🅿️</div>
-        <div>
-          <span class="text-[10px] font-bold text-blue-500 uppercase">09:50 AM</span>
-          <h4 class="font-semibold text-sm mt-0.5">Park at Village Entrance</h4>
-          <div class="hbox bg-blue-50 mt-2">
-            <div class="text-[11px] font-semibold text-blue-700">🅿️ Parkplatz Lauterbrunnen (P1 / P2)</div>
-            <div class="text-[11px] text-blue-600 mt-0.5">Large car park at village entrance · ~CHF 15–20/day · Toilets right at entry</div>
-            <a href="https://maps.google.com/?q=Parkplatz+Lauterbrunnen+Switzerland" target="_blank" class="chip bg-blue-100 text-blue-700 mt-2">📍 Maps</a>
-          </div>
-          <span class="chip bg-green-50 text-green-700 mt-2">🚻 Toilets at car park entrance — use before walking</span>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot bg-emerald-100 text-emerald-600">🌿</div>
-        <div>
-          <span class="text-[10px] font-bold text-emerald-500 uppercase">10:00 AM</span>
-          <h4 class="font-semibold text-sm mt-0.5">Valley Walk + Village Stroll</h4>
-          <p class="text-xs text-slate-500 mt-1">Flat walking path through the valley. Swiss chalets everywhere, waterfalls dripping from cliff edges. The 6-year-old will think it's a fairy tale.</p>
-          <div class="flex flex-wrap gap-1.5 mt-2">
-            <a href="https://maps.google.com/?q=Lauterbrunnen+Valley+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
-            <a href="https://www.youtube.com/results?search_query=lauterbrunnen+valley+switzerland+spring+4k" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
-            <a href="https://www.instagram.com/explore/tags/lauterbrunnen/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #lauterbrunnen</a>
-          </div>
-          <div class="hbox bg-emerald-50 mt-2 text-[11px] text-emerald-700">
-            📸 <strong>Iconic Shot:</strong> Stand in the center of the valley road looking toward the cliff walls — vertical rock + cascading waterfalls on both sides. Portrait format, maximum drama.
-          </div>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot bg-blue-100 text-blue-500">💦</div>
-        <div>
-          <span class="text-[10px] font-bold text-blue-500 uppercase">10:45 AM</span>
-          <h4 class="font-semibold text-sm mt-0.5">Staubbach Falls</h4>
-          <p class="text-xs text-slate-500 mt-1">297m waterfall dropping straight from the clifftop into the village. <strong>Free!</strong> Optional easy 10-min path up to the cave viewpoint behind the falls — unforgettable close-up.</p>
-          <div class="flex flex-wrap gap-1.5 mt-2">
-            <a href="https://maps.google.com/?q=Staubbach+Falls+Lauterbrunnen" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
-            <a href="https://www.youtube.com/results?search_query=staubbach+falls+lauterbrunnen" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
-            <a href="https://www.instagram.com/explore/tags/staubbachfalls/" target="_blank" class="chip bg-pink-50 text-pink-500">📷 #staubbachfalls</a>
-          </div>
-          <div class="hbox bg-blue-50 mt-2 text-[11px] text-blue-700">
-            📸 <strong>Photo:</strong> Shoot from the road with entire waterfall in frame — village at bottom, cliff top at top. Include someone in the foreground for scale. Absolutely stunning.
-          </div>
-          <span class="chip bg-green-50 text-green-700 mt-2">🚻 Public toilet near falls viewpoint</span>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot bg-cyan-100 text-cyan-600">🌀</div>
-        <div>
-          <span class="text-[10px] font-bold text-cyan-500 uppercase">12:00 PM</span>
-          <h4 class="font-semibold text-sm mt-0.5">⚡ Trümmelbach Falls (Unmissable!)</h4>
-          <p class="text-xs text-slate-500 mt-1">UNESCO-listed! Glacier meltwater crashing through tunnels INSIDE a mountain. Elevator access — perfect for elderly! The power and noise is unreal. Get slightly wet. Kids go wild.</p>
-          <div class="grid grid-cols-2 gap-2 mt-2">
-            <div class="hbox bg-cyan-50 text-[11px] text-cyan-700">
-              <div class="font-semibold">🎟️ Tickets</div>
-              <div class="mt-0.5">Adult: ~CHF 16<br>Child: ~CHF 8<br>6A+2C ≈ <strong>CHF 112</strong></div>
-            </div>
-            <div class="hbox bg-cyan-50 text-[11px] text-cyan-700">
-              <div class="font-semibold">⚠️ Important</div>
-              <div class="mt-0.5">Bring a jacket!<br>Gets very misty<br>~45 min visit</div>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-1.5 mt-2">
-            <a href="https://maps.google.com/?q=Trummelbach+Falls+Lauterbrunnen+Switzerland" target="_blank" class="chip bg-slate-100 text-slate-600">📍 Maps</a>
-            <a href="https://www.youtube.com/results?search_query=trummelbach+falls+inside+mountain+switzerland" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
-          </div>
-          <span class="chip bg-green-50 text-green-700 mt-2">🚻 At Trümmelbach entrance building</span>
-          <div>
-            <button class="tkt-btn" onclick="toggleTicket('truemmelbach')">
-              🎟️ Ticket Info <span id="tkt-arrow-truemmelbach">▾</span>
-            </button>
-            <div id="tkt-truemmelbach" class="tkt-box hidden">
-              <a href="https://www.truemmelbachfaelle.ch/e/" target="_blank" rel="noopener" class="tkt-link">
-                🔗 Official Website — truemmelbachfaelle.ch ↗
-              </a>
-              <p class="tkt-onsite">⚠️ No online booking — tickets bought at entrance only · Cash or card accepted</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot bg-orange-100 text-orange-500">🍽️</div>
-        <div>
-          <span class="text-[10px] font-bold text-orange-500 uppercase">13:30 PM</span>
-          <h4 class="font-semibold text-sm mt-0.5">Lunch in Lauterbrunnen</h4>
-          <p class="text-xs text-slate-500 mt-1">Limited Indian options here — Swiss restaurants are the smart choice. Rösti, pasta, cheese dishes are vegetarian-friendly and delicious.</p>
-          <div class="space-y-2 mt-2">
-            <a href="https://maps.google.com/?q=vegetarian+restaurant+Lauterbrunnen+Switzerland" target="_blank" class="chip bg-orange-100 text-orange-600">🔍 Find Restaurants</a>
-            <div class="hbox bg-orange-50 text-[11px] text-orange-700">
-              <strong>Look for:</strong> Any restaurant with "Rösti" or "Pasta" on the board. Restaurant Schützen and Restaurant Jungfrau are known options in the village.
-            </div>
-          </div>
-          <p class="text-[11px] text-slate-400 mt-1.5">💰 Budget: ~CHF 120–160 for 8 people</p>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot bg-purple-100 text-purple-500">☕</div>
-        <div>
-          <span class="text-[10px] font-bold text-purple-500 uppercase">15:00 PM</span>
-          <h4 class="font-semibold text-sm mt-0.5">Coffee Break + Slow Valley Time</h4>
-          <p class="text-xs text-slate-500 mt-1">Don't rush out! Let the valley breathe. Kids play by the stream. Elderly sip coffee with a view. This unhurried time is actually the magic of Lauterbrunnen.</p>
-          <a href="https://maps.google.com/?q=cafe+Lauterbrunnen+Switzerland" target="_blank" class="chip bg-purple-100 text-purple-600 mt-2">☕ Find Cafés</a>
-        </div>
-      </div>
-
-      <div class="tl-item">
-        <div class="tl-dot bg-slate-100 text-slate-500">🏡</div>
-        <div>
-          <span class="text-[10px] font-bold text-slate-400 uppercase">16:30 PM</span>
-          <h4 class="font-semibold text-sm mt-0.5">Return to Merligen</h4>
-          <p class="text-xs text-slate-500 mt-1">30-min drive back. Tired, wet from falls, full of memories. Home dinner + rest. Tomorrow is the flexible day.</p>
-        </div>
-      </div>
-    </div><!-- /card -->
-
-    <div class="card">
-      <h3 class="font-semibold text-sm mb-3">💰 Day 2 Budget</h3>
-      <div class="space-y-2 text-xs">
-        <div class="flex justify-between"><span class="text-slate-500">🅿️ Parkplatz Lauterbrunnen</span><span class="font-semibold">~15–20 CHF</span></div>
-        <div class="flex justify-between"><span class="text-slate-500">🌀 Trümmelbach Falls (6A+2C)</span><span class="font-semibold">~112 CHF</span></div>
-        <div class="flex justify-between"><span class="text-slate-500">🍽️ Lunch (8 people)</span><span class="font-semibold">120–160 CHF</span></div>
-        <div class="flex justify-between"><span class="text-slate-500">☕ Coffee + Snacks</span><span class="font-semibold">40–60 CHF</span></div>
-        <div class="flex justify-between text-sm font-bold pt-2 border-t border-slate-100"><span>Total</span><span class="text-emerald-600">~287–352 CHF</span></div>
-      </div>
-    </div>
-  </div><!-- /content-2-full -->
-
-  <!-- ACTIVE MODE (Day 2) -->
-  <div id="content-2-active" class="hidden">
-    <div class="card">
-      <h3 class="font-semibold text-sm mb-3">🏃 Without 👴👵 Extras — Day 2</h3>
-      <div class="space-y-3">
-        <div style="background:linear-gradient(135deg,#f5f3ff,#ede9fe);" class="rounded-xl p-3 border border-purple-100">
-          <div class="font-semibold text-sm text-purple-700">🚂 Train to Wengen (Car-Free Village!)</div>
-          <p class="text-xs text-purple-600 mt-1">No cars allowed in Wengen! Take the rack railway from Lauterbrunnen station. Village sits high on the cliff with jaw-dropping valley views looking DOWN at Lauterbrunnen.</p>
-          <div class="text-xs font-semibold text-purple-800 mt-1">~CHF 22 return/adult · 15 min ride · Perfect for teens</div>
-          <div class="flex gap-1.5 mt-2">
-            <a href="https://maps.google.com/?q=Wengen+Switzerland" target="_blank" class="chip bg-purple-100 text-purple-700">📍 Maps</a>
-            <a href="https://www.youtube.com/results?search_query=wengen+switzerland+train+views" target="_blank" class="chip bg-red-50 text-red-500">▶ YouTube</a>
-          </div>
-        </div>
-        <div style="background:linear-gradient(135deg,#ecfdf5,#d1fae5);" class="rounded-xl p-3 border border-green-100">
-          <div class="font-semibold text-sm text-green-700">🥾 Valley Floor Trail (Easy Walk)</div>
-          <p class="text-xs text-green-600 mt-1">1-hour flat walk through valley following the glacial stream. Crystal-clear water. Kids love wading at safe points. Total fairy-tale scenery.</p>
-          <div class="text-xs font-semibold text-green-800 mt-1">Free · Flat terrain · Great for the 13yr-old</div>
         </div>
       </div>
     </div>
