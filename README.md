@@ -1,48 +1,46 @@
-# 🇨🇭 Itinera — Switzerland Family Trip Planner
+# ✈️ Itinera — Family Trip Planner
 
-> Interactive mobile-first travel itinerary for a family trip to the Interlaken region, Switzerland.
+> Interactive, mobile-first travel itineraries. Open the site and switch between trips from the bar at the top.
 
 **Live →** [GitHub Pages](https://ignitedmind28.github.io/itinera/) · [GitLab Pages](https://ignitedmind28.gitlab.io/iteneria/)
 
 ---
 
+## Trips
+
+| Trip | Page | When |
+|------|------|------|
+| 🇫🇷 **Paris — Birthday Trip** (default) | [`index.html`](index.html) | Aug 15 – 19, 2026 |
+| 🇨🇭 Switzerland — Interlaken Family Trip | [`switzerland.html`](switzerland.html) | Apr 29 – May 3, 2026 |
+
+Every page has a **trip switcher** at the very top so you can jump between the two.
+
 ## About
 
-Itinera is a shareable, interactive travel planner built as a single `index.html` file. Designed for a group of 8 (two couples, two elderly 60+, and two kids aged 6 & 13) traveling the Interlaken region from **April 29 – May 3, 2026**.
+Itinera is a set of shareable, interactive travel planners — each one a single self-contained HTML file. The Paris page is the default landing page; a switcher links to the Switzerland page (and back).
 
-## Features
+## Paris — features
 
-- **Day-by-day navigation** — Apr 29 → May 3, colour-coded per day
-- **Two modes per day** — Full Group 👨‍👩‍👧‍👦 vs Active Mode 🏃 (when elderly stay back)
-- **Day 3 A/B toggle** — Grindelwald adventure or chill Iseltwald/Caves day
-- **Every stop includes** — Google Maps link, YouTube search, Instagram hashtag
-- **Practical info** — 🅿️ Parking details, 🚻 toilet locations, 📸 photo tips, ☕ coffee breaks
-- **Restaurant guide** — 🇮🇳 Indian/vegetarian options searched per location
-- **Budget overview** — Day-by-day breakdown with visual bars + full trip summary
-- **Emergency numbers** — Swiss emergency contacts accessible from bottom bar
-- **Mobile-first** — Built for phones, shareable URL
+- **Day-by-day navigation** — Aug 15 → 19, colour-coded per day, birthday day highlighted 🎂
+- **"Getting Around Today"** on every day — the smart *metro-there → walk → Bolt-back* plan, with live Google Maps transit links
+- **Every stop includes** — Google Maps pin, and photo/Instagram links where useful
+- **Tickets to book** panel + **Budget & survival kit** (2026 fares, August tips, kid tips, emergency numbers)
+- Arrival/departure routes covered for **Eurostar, CDG and Orly**
+
+## Switzerland — features
+
+- Day-by-day navigation (Apr 29 → May 3), Full-Group vs Active mode per day, Day 3 A/B toggle
+- Google Maps / YouTube / Instagram links, parking + toilet + photo tips, budget overview, emergency numbers
 
 ## Stack
 
 - Plain HTML · Tailwind CSS (CDN) · Vanilla JS · Google Fonts
-- Zero build step — open `index.html` directly in any browser
-
-## Itinerary
-
-| Day | Date | Theme |
-|-----|------|-------|
-| 0 | Apr 29 | Arrival: ZRH → Spiez Castle → Merligen |
-| 1 | Apr 30 | Interlaken + Harder Kulm + Unterseen |
-| 2 | May 1 | Lauterbrunnen + Staubbach + Trümmelbach Falls |
-| 3 | May 2 | Grindelwald First *or* Iseltwald + St. Beatus Caves |
-| 4 | May 3 | Lucerne → Zurich Airport departure |
+- Zero build step — open any `.html` directly in a browser
 
 ## Updating
 
-Use the included push script to commit and sync both remotes:
+Use the included push script to commit and sync both remotes (GitLab `origin` + GitHub `github`):
 
 ```bash
 ./push.sh "Your commit message"
 ```
-
-This stages all changes, commits, and pushes to both GitLab (`origin`) and GitHub (`github`) in one command.
