@@ -1,0 +1,6 @@
+# Source photo — the faint hero portrait is embedded (base64) in index.html,
+# so the full-resolution original is deliberately NOT published.
+Nirvaan.png
+
+# macOS cruft
+.DS_Store
